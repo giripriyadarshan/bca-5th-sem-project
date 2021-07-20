@@ -35,20 +35,9 @@
                 
             </TreeView>
         </DockPanel>
-        <!--
-        <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="4">
-            <DockPanel.Resources>
-                
-            </DockPanel.Resources>
-         </DockPanel>
-        -->
-
-        <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="4">
-            <Label Name="testlabel" />
-        </DockPanel>
-
-        <DockPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
-            
+        
+        <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3">
+            <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" />
         </DockPanel>
 
     </Grid>

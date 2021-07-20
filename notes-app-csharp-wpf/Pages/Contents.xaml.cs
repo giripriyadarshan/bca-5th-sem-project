@@ -79,12 +79,27 @@ namespace notes_app_csharp_wpf.Pages
         {
             if (e.NewValue is MenuItem selectedItem)
             {
-                testlabel.Content = selectedItem.Index;
                 // create a template to display file-names using listbox
                 // double click on the item of the list will open th e pdf file associated with the name
                 // to open a file use
                 // System.Diagnostics.Process.Start(@"|DataDirectory|\\Resources\\files\\" + selectedItem.Index);
+                DataTable files = new DataTable();
+                Set_Command("SELECT * FROM year WHERE Id=" + selectedItem.Index);
+                connection.Open();
+                _ = da.Fill(files);
+
+                foreach (DataRow dtrow in files.Rows)
+                {
+                    _ = FileList.Items.Add(dtrow["filename"].ToString());
+                }
+                connection.Close();
             }
+        }
+
+        private void FileList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // just to show how to access the filename displayed on the list
+            _ = MessageBox.Show(FileList.SelectedItem.ToString());
         }
     }
 
