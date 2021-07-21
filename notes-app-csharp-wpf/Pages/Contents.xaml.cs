@@ -77,14 +77,16 @@ namespace notes_app_csharp_wpf.Pages
 
         private void MainList_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (e.NewValue is MenuItem selectedItem)
+            MenuItem selectedItem = e.NewValue as MenuItem;
+            if (selectedItem != null)
             {
                 // create a template to display file-names using listbox
                 // double click on the item of the list will open th e pdf file associated with the name
                 // to open a file use
                 // System.Diagnostics.Process.Start(@"|DataDirectory|\\Resources\\files\\" + selectedItem.Index);
+                FileList.Items.Clear();
                 DataTable files = new DataTable();
-                Set_Command("SELECT * FROM year WHERE Id=" + selectedItem.Index);
+                Set_Command("SELECT * FROM year WHERE Id='" + selectedItem.Index + "'");
                 connection.Open();
                 _ = da.Fill(files);
 

@@ -28,7 +28,7 @@
                     <MenuItem Header="Login" Click="MenuItem_Click_1" />
                     <MenuItem Header="About" />
                     <Separator />
-                    <MenuItem Header="Exit" />
+                    <MenuItem Header="Exit" Click="MenuItem_Click_2" />
                 </MenuItem>
             </Menu>
         </DockPanel>

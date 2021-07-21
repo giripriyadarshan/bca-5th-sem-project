@@ -27,17 +27,22 @@ namespace notes_app_csharp_wpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new Pages.Contents());
+            _ = MainFrame.NavigationService.Navigate(new Pages.Contents());
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new Pages.SlideshowOrHomepage());
+            _ = MainFrame.NavigationService.Navigate(new Pages.SlideshowOrHomepage());
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new Pages.LoginPage());
+            _ = MainFrame.NavigationService.Navigate(new Pages.LoginPage());
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
