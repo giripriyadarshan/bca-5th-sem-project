@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data;
 using System.Windows;
-using System.Windows.Controls;
 using static notes_app_csharp_wpf.commons;
 
 namespace notes_app_csharp_wpf.Pages
@@ -9,7 +8,7 @@ namespace notes_app_csharp_wpf.Pages
     /// <summary>
     /// Interaction logic for Contents.xaml
     /// </summary>
-    public partial class Contents : Page
+    public partial class Contents
     {
         public Contents()
         {
@@ -34,7 +33,7 @@ namespace notes_app_csharp_wpf.Pages
                     Title = dtrow["semester"].ToString(),
                 };
 
-                Set_Command("SELECT * FROM subject WHERE semesterID=" + dtrow["Id"].ToString());
+                Set_Command("SELECT * FROM subject WHERE semesterID=" + dtrow["Id"]);
                 DataTable s = new DataTable();
                 _ = da.Fill(s);
 
@@ -47,8 +46,8 @@ namespace notes_app_csharp_wpf.Pages
 
                     Set_Command(
                         "SELECT * FROM year WHERE semesterID=" +
-                        dtrow2["semesterID"].ToString() +
-                        " AND subjectID=" + dtrow2["Id"].ToString()
+                        dtrow2["semesterID"] +
+                        " AND subjectID=" + dtrow2["Id"]
                         );
                     DataTable y = new DataTable();
                     _ = da.Fill(y);
