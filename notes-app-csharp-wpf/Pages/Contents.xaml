@@ -37,7 +37,16 @@
         </DockPanel>
         
         <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3">
-            <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" />
+            <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" HorizontalContentAlignment="Center">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:ListOfFiles}">
+                        <StackPanel Orientation="Vertical">
+                            <ContentControl Content="{Binding AdobePdfIcon}" />
+                            <TextBlock Text="{Binding PathOfFile}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate> 
+            </ListBox>
         </DockPanel>
 
     </Grid>
