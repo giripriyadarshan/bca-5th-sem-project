@@ -4,6 +4,7 @@ namespace notes_app_csharp_wpf
 {
     class commons
     {
+        // Database related
         public static string connstring = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|vapdb.mdf;Integrated Security=True;Connect Timeout=30";
         public static SqlConnection connection = new SqlConnection(connstring);
         public static SqlCommand command = new SqlCommand();
@@ -14,5 +15,9 @@ namespace notes_app_csharp_wpf
             command.Connection = connection;
             command.CommandText = query;
         }
+
+        // Other stuffs
+        public static bool adminLoginSession = false;
+        public static string _fileStorage = System.Environment.CurrentDirectory + "\\Resources\\" + "\\QPS\\";
     }
 }

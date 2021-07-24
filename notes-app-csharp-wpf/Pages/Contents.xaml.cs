@@ -108,7 +108,7 @@ namespace notes_app_csharp_wpf.Pages
         {
             // just to show how to access the filename displayed on the list
             var x = FileList.SelectedItem as ListOfFiles;
-            MessageBox.Show(x?.PathOfFile);
+            _ = System.Diagnostics.Process.Start(_fileStorage + x.PathOfFile);
         }
     }
 

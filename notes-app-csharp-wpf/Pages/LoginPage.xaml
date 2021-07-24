@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:notes_app_csharp_wpf.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="LoginPage">
+      Title="LoginPage" Loaded="Page_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -24,11 +24,17 @@
         </DockPanel>
 
         <Canvas Grid.Column="1" Grid.Row="1">
+
+
             <Label Content="Username: " FontSize="24" />
-            <TextBox x:Name="username_input" Width="146" FontSize="24" Canvas.Left="158" Canvas.Top="8"/>
-            <Label Content="Password: " FontSize="24" Canvas.Top="76"/>
-            <TextBox x:Name="password_input" FontSize="24" Width="146" Canvas.Left="158" Canvas.Top="84" />
-            <Button x:Name="login_button" Content="Login" Canvas.Top="204" FontSize="35" Width="375" FontWeight="Bold" />
+            <TextBox x:Name="UsernameInput" Width="146" FontSize="24" Canvas.Left="158" Canvas.Top="8"/>
+
+            <Label Content="Password: " FontSize="24" Canvas.Top="76" />
+            <PasswordBox x:Name="PasswordInput" FontSize="24" Width="146" Canvas.Left="158" Canvas.Top="84" />
+
+            <Button x:Name="LoginButton" Content="Login" Canvas.Top="204" FontSize="35" Width="375" FontWeight="Bold" Click="Login_button_OnClick" />
+
+
         </Canvas>
     </Grid>
 </Page>

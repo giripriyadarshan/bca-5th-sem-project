@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using static notes_app_csharp_wpf.commons;
 
 namespace notes_app_csharp_wpf
 {
@@ -30,6 +31,16 @@ namespace notes_app_csharp_wpf
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            _ = MainFrame.NavigationService.Navigate(new Pages.AddContent());
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            adminLoginSession = false;
         }
     }
 }

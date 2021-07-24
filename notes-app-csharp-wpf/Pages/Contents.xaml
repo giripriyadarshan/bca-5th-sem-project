@@ -24,8 +24,8 @@
 
         <DockPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="4">
 
-           
-            <TreeView x:Name="MainList" DockPanel.Dock="Top" SelectedItemChanged="MainList_SelectedItemChanged" >
+
+            <TreeView x:Name="MainList" DockPanel.Dock="Top" SelectedItemChanged="MainList_SelectedItemChanged" Background="Transparent">
 
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type local:MenuItem}" ItemsSource="{Binding Items}">
@@ -37,7 +37,7 @@
         </DockPanel>
         
         <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3">
-            <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" HorizontalContentAlignment="Center">
+            <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" HorizontalContentAlignment="Center" Background="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type local:ListOfFiles}">
                         <StackPanel Orientation="Vertical">

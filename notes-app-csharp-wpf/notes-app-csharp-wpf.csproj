@@ -68,6 +68,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AddContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Contents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -80,8 +84,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\SuccessfullyAcceptedDocuments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\AddContent.xaml.cs">
+      <DependentUpon>AddContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Contents.xaml.cs">
       <DependentUpon>Contents.xaml</DependentUpon>
     </Compile>
@@ -90,6 +101,9 @@
     </Compile>
     <Compile Include="Pages\SlideshowOrHomepage.xaml.cs">
       <DependentUpon>SlideshowOrHomepage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SuccessfullyAcceptedDocuments.xaml.cs">
+      <DependentUpon>SuccessfullyAcceptedDocuments.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
