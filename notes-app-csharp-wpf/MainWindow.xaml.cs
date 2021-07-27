@@ -15,7 +15,7 @@ namespace notes_app_csharp_wpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _ = MainFrame.NavigationService.Navigate(new Pages.Contents());
+            _ = MainFrame.NavigationService.Navigate(new Pages.SlideshowOrHomepage());
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -30,7 +30,7 @@ namespace notes_app_csharp_wpf
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            Close();
+            Application.Current.Shutdown();
         }
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)

@@ -77,10 +77,7 @@ namespace notes_app_csharp_wpf.Pages
         private void MainList_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (!(e.NewValue is MenuItem selectedItem)) return;
-            // create a template to display file-names using listbox
-            // double click on the item of the list will open th e pdf file associated with the name
-            // to open a file use
-            // System.Diagnostics.Process.Start(@"|DataDirectory|\\Resources\\files\\" + selectedItem.Index);
+            
             FileList.Items.Clear();
             var files = new DataTable();
             Set_Command("SELECT * FROM year WHERE Id='" + selectedItem.Index + "'");
@@ -94,7 +91,7 @@ namespace notes_app_csharp_wpf.Pages
 
             foreach (DataRow dtrow in files.Rows)
             {
-                FileList.Items.Add(new ListOfFiles()
+                _ = FileList.Items.Add(new ListOfFiles()
                 {
                     PathOfFile = dtrow["filename"].ToString(),
                     AdobePdfIcon = x
@@ -106,9 +103,10 @@ namespace notes_app_csharp_wpf.Pages
 
         private void FileList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // just to show how to access the filename displayed on the list
+            // if no item is selected, then it used to open the _fileStorage directory
+            if (FileList.SelectedItem == null) return;
             var x = FileList.SelectedItem as ListOfFiles;
-            _ = System.Diagnostics.Process.Start(_fileStorage + x.PathOfFile);
+            _ = System.Diagnostics.Process.Start(_fileStorage + x?.PathOfFile);
         }
     }
 

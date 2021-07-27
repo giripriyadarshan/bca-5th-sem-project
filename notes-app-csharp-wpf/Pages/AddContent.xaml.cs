@@ -70,13 +70,13 @@ namespace notes_app_csharp_wpf.Pages
 
             connection.Close();
             _pathExists = false;
-            _ = NavigationService.Navigate(new SuccessfullyAcceptedDocuments());
+            NavigationService?.Navigate(new SuccessfullyAcceptedDocuments());
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             adminLoginSession = false;
-            _ = NavigationService.Navigate(new LoginPage());
+            NavigationService?.Navigate(new LoginPage());
         }
     }
 }

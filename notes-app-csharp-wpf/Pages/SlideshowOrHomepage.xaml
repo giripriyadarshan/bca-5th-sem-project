@@ -11,11 +11,38 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Image Grid.Row="0" Grid.Column="0" Stretch="Fill" x:Name="SlideshowBlock"></Image>
+        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Welcome" FontSize="45" FontWeight="Bold"/>
+        </DockPanel>
+
+        <!-- Replace the image slideshow with relevant control/description/etc -->
+        <Image Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Stretch="Fill" x:Name="SlideshowBlock"></Image>
+
+        
+        <Button Content="Exit" Margin="10,10" Width="150" Height="50"
+                FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Grid.Column="1" Grid.Row="3"
+                x:Name="ExitButton" Click="ExitButton_Click"
+                />
+
+        <Button Content="Papers" Margin="10,10" Width="150" Height="50"
+                FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Grid.Column="2" Grid.Row="3"
+                x:Name="Papers" Click="Papers_Click"
+                />
+
+
+
     </Grid>
 </Page>

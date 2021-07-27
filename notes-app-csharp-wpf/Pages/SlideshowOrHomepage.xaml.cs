@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace notes_app_csharp_wpf.Pages
@@ -21,12 +11,12 @@ namespace notes_app_csharp_wpf.Pages
     /// Interaction logic for SlideshowOrHomepage.xaml
     /// </summary>
 
-    public partial class SlideshowOrHomepage : Page
+    public partial class SlideshowOrHomepage
     {
-        private List<BitmapImage> Images = new List<BitmapImage>();
-        private int ImageNumber;
-        private DispatcherTimer PictureTimer = new DispatcherTimer();
-        private Random rand = new Random();
+        private readonly List<BitmapImage> _images = new List<BitmapImage>();
+        private int _imageNumber;
+        private readonly DispatcherTimer _pictureTimer = new DispatcherTimer();
+        private readonly Random _rand = new Random();
         
 
         public SlideshowOrHomepage()
@@ -37,25 +27,35 @@ namespace notes_app_csharp_wpf.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            PictureTimer.Interval = new TimeSpan(0, 0, 2);
-            PictureTimer.Tick += new EventHandler(PictureTimer_Tick);
-            PictureTimer.Start();
+            _pictureTimer.Interval = new TimeSpan(0, 0, 2);
+            _pictureTimer.Tick += PictureTimer_Tick;
+            _pictureTimer.Start();
 
-            DirectoryInfo dir_info = new DirectoryInfo(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\");
-            foreach (FileInfo file_info in dir_info.GetFiles())
+            DirectoryInfo dirInfo = new DirectoryInfo(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\");
+            foreach (FileInfo fileInfo in dirInfo.GetFiles())
             {
-                if ((file_info.Extension.ToLower() == ".jpg") ||
-                    (file_info.Extension.ToLower() == ".png"))
+                if ((fileInfo.Extension.ToLower() == ".jpg") ||
+                    (fileInfo.Extension.ToLower() == ".png"))
                 {
-                    Images.Add(new BitmapImage(new Uri(file_info.FullName)));
+                    _images.Add(new BitmapImage(new Uri(fileInfo.FullName)));
                 }
             }
         }
 
         private void PictureTimer_Tick(object sender, EventArgs e)
         {
-            ImageNumber = rand.Next(Images.Count);
-            SlideshowBlock.Source = Images[ImageNumber];
+            _imageNumber = _rand.Next(_images.Count);
+            SlideshowBlock.Source = _images[_imageNumber];
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Papers_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new Contents());
         }
     }
 
