@@ -55,7 +55,7 @@ namespace notes_app_csharp_wpf.Pages
 
         private void Papers_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Contents());
+            _ = (NavigationService?.Navigate(new Contents()));
         }
     }
 

@@ -25,11 +25,11 @@ namespace notes_app_csharp_wpf.Pages
             if (dt.Rows.Count > 0)
             {
                 adminLoginSession = true;
-                NavigationService?.Navigate(new AddContent());
+                _ = NavigationService?.Navigate(new AddContent());
             }
             else
             {
-                NavigationService?.Navigate(new Contents());
+                _ = NavigationService?.Navigate(new Contents());
             }
 
             connection.Close();
@@ -39,7 +39,7 @@ namespace notes_app_csharp_wpf.Pages
         {
             if (adminLoginSession)
             {
-                NavigationService?.Navigate(new AddContent());
+                _ = NavigationService?.Navigate(new AddContent());
             }
         }
     }
