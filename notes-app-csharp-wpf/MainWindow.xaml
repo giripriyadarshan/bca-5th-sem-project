@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:notes_app_csharp_wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Previous year papers" 
+        Height="450" Width="800" MinHeight="300" MinWidth="400"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="ico.png">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,7 +24,7 @@
             <RowDefinition Height="84*"/>
         </Grid.RowDefinitions>
         <DockPanel Background="Gray" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" >
-            <Menu DockPanel.Dock="Top" >
+            <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Page">
                     <MenuItem Header="Home" Click="MenuItem_Click" />
                     <MenuItem Header="Login" Click="MenuItem_Click_1" />
@@ -33,10 +34,20 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        
-        <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="4" x:Name="MainFrame" NavigationUIVisibility="Hidden">
 
-        </Frame>
+        <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="4" x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+        
     </Grid>
 
+    <Window.Resources>
+        <Storyboard x:Key="TextBoxAnimation">
+            <ColorAnimation 
+                From="Transparent" To="Red"
+                Duration="0:0:0.1" 
+                AutoReverse="True" 
+                RepeatBehavior="0:0:0.4"
+                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                />
+        </Storyboard>
+    </Window.Resources>
 </Window>
