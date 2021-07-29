@@ -3,11 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:notes_app_csharp_wpf.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginPage" Loaded="Page_Loaded">
 
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="209*"/>
@@ -23,8 +23,9 @@
             <Label Content="LOGIN" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="65" Margin="0" Width="790" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontFamily="Segoe Script"/>
         </DockPanel>
 
-        <Canvas Grid.Column="1" Grid.Row="1">
+        <Canvas Grid.Column="1" Grid.Row="1" Margin="20,20" >
 
+            <!-- Convert Canvas into Grid and allot labels and textboxes accordingly, and try to wrap all elements to scrollviewer to enable scrolling -->
 
             <Label Content="Username: " FontSize="24" />
             <TextBox x:Name="UsernameInput" Width="146" FontSize="24" Canvas.Left="158" Canvas.Top="8"/>
@@ -32,7 +33,7 @@
             <Label Content="Password: " FontSize="24" Canvas.Top="76" />
             <PasswordBox x:Name="PasswordInput" FontSize="24" Width="146" Canvas.Left="158" Canvas.Top="84" />
 
-            <Button x:Name="LoginButton" Content="Login" Canvas.Top="204" FontSize="35" Width="375" FontWeight="Bold" Click="Login_button_OnClick" />
+            <Button x:Name="LoginButton" Content="Login" Canvas.Top="204" FontSize="35" Width="342" FontWeight="Bold" Click="Login_button_OnClick" />
 
 
         </Canvas>

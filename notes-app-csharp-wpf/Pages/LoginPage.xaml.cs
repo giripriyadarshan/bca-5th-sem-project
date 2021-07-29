@@ -18,18 +18,24 @@ namespace notes_app_csharp_wpf.Pages
         {
             connection.Open();
             var dt = new DataTable();
-            Set_Command("SELECT * FROM users WHERE username='" + UsernameInput.Text.Trim() +
-                        "' AND password='" + PasswordInput.Password + "'");
+            Set_Command("SELECT * FROM users WHERE username='" + UsernameInput.Text.Trim() + "'");
             _ = da.Fill(dt);
 
             if (dt.Rows.Count > 0)
             {
-                adminLoginSession = true;
-                _ = NavigationService?.Navigate(new AddContent());
+                if (dt.Rows[0][2].ToString() == PasswordInput.Password)
+                {
+                    adminLoginSession = true;
+                    _ = NavigationService?.Navigate(new AddContent());
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Password");
+                }
             }
             else
             {
-                _ = NavigationService?.Navigate(new Contents());
+                MessageBox.Show("Invalid Username");
             }
 
             connection.Close();

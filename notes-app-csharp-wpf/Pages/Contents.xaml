@@ -25,7 +25,7 @@
         <DockPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="4">
 
 
-            <TreeView x:Name="MainList" DockPanel.Dock="Top" SelectedItemChanged="MainList_SelectedItemChanged" Background="Transparent">
+            <TreeView x:Name="MainList" DockPanel.Dock="Top" SelectedItemChanged="MainList_SelectedItemChanged" Background="Transparent" FontSize="22">
 
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type local:MenuItem}" ItemsSource="{Binding Items}">

@@ -3,6 +3,9 @@ using System.IO;
 using Microsoft.Win32;
 using Path = System.IO.Path;
 using static notes_app_csharp_wpf.commons;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System;
 
 namespace notes_app_csharp_wpf.Pages
 {
@@ -46,7 +49,8 @@ namespace notes_app_csharp_wpf.Pages
 
         private void SubmitButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (!_pathExists) return;
+            if (!CheckForInvalidInput()) return;
+
             _ = Directory.CreateDirectory(_fileStorage);
 
             connection.Open();
@@ -78,5 +82,47 @@ namespace notes_app_csharp_wpf.Pages
             adminLoginSession = false;
             _ = NavigationService?.Navigate(new LoginPage());
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!adminLoginSession)
+            {
+                _ = NavigationService?.Navigate(new LoginPage());
+            }
+        }
+
+        private bool CheckForInvalidInput()
+        {
+            var parent = Window.GetWindow(this);
+            var animation = parent.Resources["TextBoxAnimation"] as Storyboard;
+            bool IsInputValid = true;
+
+            if (string.IsNullOrWhiteSpace(SemesterInput.Text))
+            {
+                IsInputValid = false;
+                animation.Begin(SemesterInput);
+            }
+
+            if (string.IsNullOrWhiteSpace(SubjectInput.Text))
+            {
+                IsInputValid = false;
+                animation.Begin(SubjectInput);
+            }
+
+            if (string.IsNullOrWhiteSpace(YearInput.Text))
+            {
+                IsInputValid = false;
+                animation.Begin(YearInput);
+            }
+
+            if (!_pathExists)
+            {
+                IsInputValid = false;
+                animation.Begin(UploadButton);
+            }
+
+            return IsInputValid;
+        }
+
     }
 }

@@ -15,12 +15,12 @@ namespace notes_app_csharp_wpf.Pages
 
         private void contents_Click(object sender, RoutedEventArgs e)
         {
+            adminLoginSession = false;
             _ = NavigationService?.Navigate(new Contents());
         }
 
         private void uploadagain_Click(object sender, RoutedEventArgs e)
         {
-            adminLoginSession = true;
             _ = NavigationService?.Navigate(new AddContent());
         }
     }

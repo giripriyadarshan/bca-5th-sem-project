@@ -34,8 +34,7 @@ namespace notes_app_csharp_wpf.Pages
             DirectoryInfo dirInfo = new DirectoryInfo(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\");
             foreach (FileInfo fileInfo in dirInfo.GetFiles())
             {
-                if ((fileInfo.Extension.ToLower() == ".jpg") ||
-                    (fileInfo.Extension.ToLower() == ".png"))
+                if (fileInfo.Extension.ToLower() == ".jpg")
                 {
                     _images.Add(new BitmapImage(new Uri(fileInfo.FullName)));
                 }

@@ -35,7 +35,7 @@ namespace notes_app_csharp_wpf
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            _ = MainFrame.NavigationService.Navigate(new Pages.AddContent());
+            _ = MainFrame.NavigationService.Navigate(new Pages.AboutPage());
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
