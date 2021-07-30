@@ -16,7 +16,7 @@
         <Label Grid.Row="0" Content="About this Application" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="45" FontWeight="Bold" Margin="10,10"/>
 
         <ScrollViewer Grid.Row="1">
-        <TextBlock Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,10" FontSize="20" TextWrapping="Wrap"
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,10" FontSize="20" TextWrapping="Wrap"
                    ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
             This application is part of 4th Semester Value Added Program Project
             <LineBreak/>

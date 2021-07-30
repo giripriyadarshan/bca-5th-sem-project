@@ -23,7 +23,7 @@
             <TextBlock Text="Successfully Uploaded" FontSize="35" FontWeight="ExtraBold"/>
         </DockPanel>
         
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
             <Button x:Name="contents" Height="50" Width="120" Margin="10,0" Click="contents_Click">
                 Go Back to contents
             </Button>

@@ -30,12 +30,12 @@ namespace notes_app_csharp_wpf.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Password");
+                    _ = MessageBox.Show("Invalid Password");
                 }
             }
             else
             {
-                MessageBox.Show("Invalid Username");
+                _ = MessageBox.Show("Invalid Username");
             }
 
             connection.Close();
