@@ -29,30 +29,39 @@
 
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type local:MenuItem}" ItemsSource="{Binding Items}">
-                       <TextBlock Text="{Binding Title}" />
+                        <TextBlock Text="{Binding Title}" />
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
-                
+
             </TreeView>
         </DockPanel>
-        
-        <!-- 
-        TODO: Main Dockpanel to display the list, dynamic dockpanel to add boxes like list box side.
-        Implementation: Dynamic dockpanel will dock to the left up to the window length and move to the next line.
-                        Inside dynamic dockpanel, the icon and the name will dock to the top
-        -->
-        <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3">
-            <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" HorizontalContentAlignment="Center" Background="Transparent">
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="{x:Type local:ListOfFiles}">
-                        <StackPanel Orientation="Vertical">
-                            <ContentControl Content="{Binding AdobePdfIcon}" />
-                            <TextBlock Text="{Binding PathOfFile}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate> 
-            </ListBox>
-        </DockPanel>
+
+        <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" 
+                     HorizontalContentAlignment="Center" Background="Transparent"
+                     Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                 >
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:ListOfFiles}">
+                    <StackPanel Orientation="Vertical" Margin="20">
+                        <ContentControl Content="{Binding AdobePdfIcon}" Width="80"/>
+                        <Label Content="{Binding PathOfFile}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" Orientation="Horizontal"  />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
 
     </Grid>
 </Page>
