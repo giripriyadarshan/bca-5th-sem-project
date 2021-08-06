@@ -36,6 +36,11 @@
             </TreeView>
         </DockPanel>
         
+        <!-- 
+        TODO: Main Dockpanel to display the list, dynamic dockpanel to add boxes like list box side.
+        Implementation: Dynamic dockpanel will dock to the left up to the window length and move to the next line.
+                        Inside dynamic dockpanel, the icon and the name will dock to the top
+        -->
         <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3">
             <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" HorizontalContentAlignment="Center" Background="Transparent">
                 <ListBox.ItemTemplate>

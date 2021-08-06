@@ -61,6 +61,19 @@ namespace notes_app_csharp_wpf.Pages
                             Title = dtrow3["year"].ToString() + dtrow3["filename"],
                             Index = dtrow3["Id"].ToString()
                         });
+
+                        // list all the files during load
+                        var x = new Image
+                        {
+                            Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\" +
+                                                "\\adobepdfimage.png"))
+                        };
+                        _ = FileList.Items.Add(new ListOfFiles()
+                        {
+                            PathOfFile = dtrow3["filename"].ToString(),
+                            AdobePdfIcon = x
+                        });
+
                     }
 
                     sub.Items.Add(year);
