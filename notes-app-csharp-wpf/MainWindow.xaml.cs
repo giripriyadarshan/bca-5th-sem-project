@@ -42,5 +42,13 @@ namespace notes_app_csharp_wpf
         {
             adminLoginSession = false;
         }
+
+        private void MainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+            {
+                _ = MainFrame.RemoveBackEntry();
+            }
+        }
     }
 }

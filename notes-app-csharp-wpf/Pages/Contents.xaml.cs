@@ -20,9 +20,12 @@ namespace notes_app_csharp_wpf.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            connection.Open();
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
 
-            var sem = new MenuItem() {Title = "Semester"};
+            var sem = new MenuItem() { Title = "Semester" };
 
             var dt = new DataTable();
             Set_Command("SELECT * FROM semester");
@@ -134,6 +137,8 @@ namespace notes_app_csharp_wpf.Pages
 
         public string Title { get; set; }
 
+        // change index to sem and year seperately
+        // the purpose is to call the "year" query filtering duplicates and store the sem and sub to list all the files in that year
         public string Index { get; set; }
     }
 

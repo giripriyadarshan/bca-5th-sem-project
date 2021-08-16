@@ -35,7 +35,7 @@
             </Menu>
         </DockPanel>
 
-        <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="4" x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+        <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="4" x:Name="MainFrame" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" />
         
     </Grid>
 

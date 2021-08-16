@@ -26,7 +26,7 @@ namespace notes_app_csharp_wpf.Pages
                 if (dt.Rows[0][2].ToString() == PasswordInput.Password)
                 {
                     adminLoginSession = true;
-                    _ = NavigationService?.Navigate(new AddContent());
+                    _ = NavigationService?.Navigate(new PostLoginMenuPage());
                 }
                 else
                 {
@@ -45,7 +45,7 @@ namespace notes_app_csharp_wpf.Pages
         {
             if (adminLoginSession)
             {
-                _ = NavigationService?.Navigate(new AddContent());
+                _ = NavigationService?.Navigate(new PostLoginMenuPage());
             }
         }
     }

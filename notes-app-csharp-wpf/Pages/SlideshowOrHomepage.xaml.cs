@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using static notes_app_csharp_wpf.commons;
 
 namespace notes_app_csharp_wpf.Pages
 {
@@ -13,10 +14,6 @@ namespace notes_app_csharp_wpf.Pages
 
     public partial class SlideshowOrHomepage
     {
-        private readonly List<BitmapImage> _images = new List<BitmapImage>();
-        private int _imageNumber;
-        private readonly DispatcherTimer _pictureTimer = new DispatcherTimer();
-        private readonly Random _rand = new Random();
         
 
         public SlideshowOrHomepage()
@@ -36,7 +33,10 @@ namespace notes_app_csharp_wpf.Pages
             {
                 if (fileInfo.Extension.ToLower() == ".jpg")
                 {
-                    _images.Add(new BitmapImage(new Uri(fileInfo.FullName)));
+                    if (!isInCache)
+                    {
+                        _images.Add(new BitmapImage(new Uri(fileInfo.FullName)));
+                    }
                 }
             }
         }
@@ -55,6 +55,12 @@ namespace notes_app_csharp_wpf.Pages
         private void Papers_Click(object sender, RoutedEventArgs e)
         {
             _ = (NavigationService?.Navigate(new Contents()));
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _pictureTimer.Stop();
+            isInCache = true;
         }
     }
 

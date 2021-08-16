@@ -1,4 +1,8 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace notes_app_csharp_wpf
 {
@@ -18,6 +22,13 @@ namespace notes_app_csharp_wpf
 
         // Other stuffs
         public static bool adminLoginSession = false;
-        public static string _fileStorage = System.Environment.CurrentDirectory + "\\Resources\\" + "\\QPS\\";
+        public static string _fileStorage = Environment.CurrentDirectory + "\\Resources\\" + "\\QPS\\";
+
+        // Images
+        public static bool isInCache = false;
+        public static readonly List<BitmapImage> _images = new List<BitmapImage>();
+        public static int _imageNumber;
+        public static readonly DispatcherTimer _pictureTimer = new DispatcherTimer();
+        public static readonly Random _rand = new Random();
     }
 }
