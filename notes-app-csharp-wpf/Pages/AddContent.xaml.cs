@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using Path = System.IO.Path;
 using static notes_app_csharp_wpf.commons;
 using System.Windows.Media.Animation;
+using System.Data;
 
 namespace notes_app_csharp_wpf.Pages
 {
@@ -41,7 +42,6 @@ namespace notes_app_csharp_wpf.Pages
             _pathExists = true;
             _filepath = pdfFile.FileName;
             _filename = Path.GetFileName(_filepath);
-            _ = MessageBox.Show(_filename);
 
         }
 
@@ -49,9 +49,10 @@ namespace notes_app_csharp_wpf.Pages
         {
             if (!CheckForInvalidInput()) return;
 
-            _ = Directory.CreateDirectory(_fileStorage);
-
-            connection.Open();
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
 
             Set_Command("INSERT INTO subject(subject_name, semesterID) OUTPUT INSERTED.Id VALUES(@subject, @semester)");
             _ = command.Parameters.AddWithValue("@subject", SubjectInput.Text.Trim());
@@ -68,9 +69,12 @@ namespace notes_app_csharp_wpf.Pages
 
             _ = command.ExecuteNonQuery();
 
-            File.Copy(_filepath , _fileStorage + _filename);
+            // add yearID as one of the subfolders to segregate the kind of recurring format files
+            _ = Directory.CreateDirectory(_fileStorage); // + yearID
+            File.Copy(_filepath , _fileStorage + _filename); // + yearID + _filename
 
             connection.Close();
+
             _pathExists = false;
             _ = NavigationService?.Navigate(new SuccessfullyAcceptedDocuments());
         }

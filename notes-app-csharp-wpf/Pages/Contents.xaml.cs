@@ -67,11 +67,11 @@ namespace notes_app_csharp_wpf.Pages
         ' select * from sem '
 
         for each row in sem
-            add sem to list
+            add sem to list (new)
             ' select * from sub where sem number = sem '
 
             for each row in sub
-                add sub to sem's list
+                add sub to sem's list (new)
                 ' select * from year where subID = ID '
 
                 for each row in year
@@ -101,36 +101,36 @@ namespace notes_app_csharp_wpf.Pages
             var sem = new MenuItem() { Title = "Semester" };
 
             var dt = new DataTable();
-            Set_Command("SELECT * FROM semester ORDER BY semester ASC");
+            Set_Command("SELECT * FROM semester ORDER BY sem ASC");
             _ = da.Fill(dt);
 
             foreach (DataRow dtrow in dt.Rows)
             {
                 
                 
-                    var sub = new MenuItem()
-                    {
-                        Title = dtrow["semester"].ToString(),
-                    };
+                var sub = new MenuItem()
+                {
+                    Title = dtrow["sem"].ToString(),
+                };
                 
 
-                Set_Command("SELECT subject_name, Id, semesterID FROM subject WHERE semesterID='" + dtrow["Id"] + "' GROUP BY subject_name");
+                Set_Command("SELECT * FROM subject WHERE semesterID='" + dtrow["sem"] + "' ORDER BY subject_name ASC");
                 var s = new DataTable();
                 _ = da.Fill(s);
 
                 foreach (DataRow dtrow2 in s.Rows)
                 {
                     
-                        var year = new MenuItem()
-                        {
-                            Title = dtrow2["subject_name"].ToString(),
-                        };
+                    var year = new MenuItem()
+                    {
+                        Title = dtrow2["subject_name"].ToString(),
+                    };
 
                     Set_Command(
-                        "SELECT DISTINCT year FROM year WHERE semesterID=" +
-                        dtrow2["semesterID"] +
-                        " AND subjectID=" + dtrow2["Id"]
+                        "SELECT * FROM year WHERE " +
+                        "subjectID=" + dtrow2["ID"]
                     );
+
                     var y = new DataTable();
                     _ = da.Fill(y);
 
@@ -138,23 +138,15 @@ namespace notes_app_csharp_wpf.Pages
                     {
                         year.Items.Add(new MenuItem()
                         {
-                            Title = dtrow3["year"].ToString(),
-                            Sem = dtrow2["semesterID"].ToString(),
-                            Sub = dtrow2["Id"].ToString()
+                            Title = dtrow3["year_number"].ToString(),
+                            YearID = dtrow3["ID"].ToString()
                         });
 
                     }
-
-                    
-                        sub.Items.Add(year);
-                    
+                    sub.Items.Add(year);
                 }
-
-                
-                    sem.Items.Add(sub);
-                
+                sem.Items.Add(sub);
             }
-
             _ = MainList.Items.Add(sem);
 
             connection.Close();
@@ -164,25 +156,20 @@ namespace notes_app_csharp_wpf.Pages
         {
             if (!(e.NewValue is MenuItem selectedItem)) return;
 
-            if (selectedItem.Sem == null) return;
+            if (selectedItem.YearID == null) return;
 
             FileList.Items.Clear();
             var files = new DataTable();
-            Set_Command("SELECT * FROM year WHERE semesterID='" + selectedItem.Sem + "' AND subjectID='" + selectedItem.Sub + "' AND year='" + selectedItem.Title + "'");
+            Set_Command("SELECT * FROM files WHERE yearID='" + selectedItem.YearID + "'");
             connection.Open();
             _ = da.Fill(files);
-            var x = new Image
-            {
-                Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\" +
-                                                 "\\adobepdfimage.png"))
-            };
 
             foreach (DataRow dtrow in files.Rows)
             {
                 _ = FileList.Items.Add(new ListOfFiles()
                 {
                     PathOfFile = dtrow["filename"].ToString(),
-                    AdobePdfIcon = x
+                    YearID = dtrow["yearID"].ToString()
                 });
             }
 
@@ -194,7 +181,7 @@ namespace notes_app_csharp_wpf.Pages
             // if no item is selected, then it used to open the _fileStorage directory
             if (FileList.SelectedItem == null) return;
             var x = FileList.SelectedItem as ListOfFiles;
-            _ = System.Diagnostics.Process.Start(_fileStorage + x?.PathOfFile);
+            _ = System.Diagnostics.Process.Start(_fileStorage + x?.YearID + x?.PathOfFile);
         }
     }
 
@@ -211,13 +198,17 @@ namespace notes_app_csharp_wpf.Pages
 
         // change index to sem and year seperately
         // the purpose is to call the "year" query filtering duplicates and store the sem and sub to list all the files in that year
-        public string Sem { get; set; }
-        public string Sub { get; set; }
+        public string YearID { get; set; }
     }
 
     public class ListOfFiles
     {
         public string PathOfFile { get; set; }
-        public Image AdobePdfIcon { get; set; }
-    }
+        public string YearID { get; set; }
+        public static Image AdobePdfIcon = new Image
+        {
+            Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\" +
+                                                 "\\adobepdfimage.png"))
+        };
+}
 }
