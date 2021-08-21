@@ -33,13 +33,10 @@ namespace notes_app_csharp_wpf.Pages
 
             foreach (DataRow dtrow in dt.Rows)
             {
-                
-                
                 var sub = new MenuItem()
                 {
                     Title = dtrow["sem"].ToString(),
                 };
-                
 
                 Set_Command("SELECT * FROM subject WHERE semesterID='" + dtrow["sem"] + "' ORDER BY subject_name ASC");
                 var s = new DataTable();
@@ -47,7 +44,6 @@ namespace notes_app_csharp_wpf.Pages
 
                 foreach (DataRow dtrow2 in s.Rows)
                 {
-                    
                     var year = new MenuItem()
                     {
                         Title = dtrow2["subject_name"].ToString(),
@@ -81,19 +77,13 @@ namespace notes_app_csharp_wpf.Pages
             Set_Command("SELECT * FROM files");
             _ = da.Fill(allfiles);
 
-            var icon = new Image
-            {
-                Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\" +
-                                                 "\\adobepdfimage.png"))
-            };
-
             foreach (DataRow dtrow in allfiles.Rows)
             {
                 _ = FileList.Items.Add(new ListOfFiles()
                 {
                     PathOfFile = dtrow["file_name"].ToString(),
                     YearID = dtrow["yearID"].ToString(),
-                   
+
                 });
             }
 

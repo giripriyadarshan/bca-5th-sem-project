@@ -20,6 +20,7 @@ namespace notes_app_csharp_wpf.Pages
             {
                 connection.Open();
             }
+
             var dt = new DataTable();
             Set_Command("SELECT * FROM admin WHERE username='" + UsernameInput.Text.Trim() + "'");
             _ = da.Fill(dt);
@@ -43,7 +44,7 @@ namespace notes_app_csharp_wpf.Pages
 
             connection.Close();
         }
- 
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (adminLoginSession)

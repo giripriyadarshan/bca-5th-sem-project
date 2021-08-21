@@ -38,7 +38,6 @@ namespace notes_app_csharp_wpf.Pages
             _pathExists = true;
             _filepath = pdfFile.FileName;
             _filename = Path.GetFileName(_filepath);
-
         }
 
         private void SubmitButton_OnClick(object sender, RoutedEventArgs e)
@@ -67,7 +66,8 @@ namespace notes_app_csharp_wpf.Pages
             }
             else
             {
-                _ = MessageBox.Show("Please input valid semester number in arithmetic digits i.e 6", "INVALID SEMESTER INPUT");
+                _ = MessageBox.Show("Please input valid semester number in arithmetic digits i.e 6",
+                    "INVALID SEMESTER INPUT");
                 return;
             }
 
@@ -75,8 +75,8 @@ namespace notes_app_csharp_wpf.Pages
             var sub = new DataTable();
             int subjectID;
             Set_Command("SELECT * FROM subject WHERE subject_name='" +
-                SubjectInput.Text.Trim().ToLower() +
-                "' AND semesterID='" + SemesterInput.Text.Trim() + "'");
+                        SubjectInput.Text.Trim().ToLower() +
+                        "' AND semesterID='" + SemesterInput.Text.Trim() + "'");
             _ = da.Fill(sub);
 
             if (sub.Rows.Count > 0)
@@ -85,7 +85,8 @@ namespace notes_app_csharp_wpf.Pages
             }
             else
             {
-                Set_Command("INSERT INTO subject(subject_name, semesterID) OUTPUT INSERTED.ID VALUES(@subject_name, @semesterID)");
+                Set_Command(
+                    "INSERT INTO subject(subject_name, semesterID) OUTPUT INSERTED.ID VALUES(@subject_name, @semesterID)");
                 command.Parameters.Clear();
                 _ = command.Parameters.AddWithValue("@subject_name", SubjectInput.Text.Trim().ToLower());
                 _ = command.Parameters.AddWithValue("@semesterID", SemesterInput.Text.Trim());
@@ -95,13 +96,15 @@ namespace notes_app_csharp_wpf.Pages
             // validate year input
             if (!int.TryParse(YearInput.Text.Trim(), out _))
             {
-                _ = MessageBox.Show("Please enter valid year number in arithmetic digits i.e 2021", "INVALID YEAR INPUT");
+                _ = MessageBox.Show("Please enter valid year number in arithmetic digits i.e 2021",
+                    "INVALID YEAR INPUT");
                 return;
             }
 
             var year = new DataTable();
             int yearID;
-            Set_Command("SELECT * FROM year WHERE year_number='" + YearInput.Text.Trim() + "' AND subjectID='" + subjectID + "'");
+            Set_Command("SELECT * FROM year WHERE year_number='" + YearInput.Text.Trim() + "' AND subjectID='" +
+                        subjectID + "'");
             _ = da.Fill(year);
 
             if (year.Rows.Count > 0)
@@ -110,7 +113,8 @@ namespace notes_app_csharp_wpf.Pages
             }
             else
             {
-                Set_Command("INSERT INTO year(year_number, subjectID) OUTPUT INSERTED.ID VALUES(@year_number, @subjectID)");
+                Set_Command(
+                    "INSERT INTO year(year_number, subjectID) OUTPUT INSERTED.ID VALUES(@year_number, @subjectID)");
                 command.Parameters.Clear();
                 _ = command.Parameters.AddWithValue("@year_number", YearInput.Text.Trim());
                 _ = command.Parameters.AddWithValue("@subjectID", subjectID);
@@ -125,7 +129,8 @@ namespace notes_app_csharp_wpf.Pages
 
             if (files.Rows.Count > 0)
             {
-                if (MessageBox.Show("File already exists in that period \nDo you want to replace the existing file with current file?",
+                if (MessageBox.Show(
+                    "File already exists in that period \nDo you want to replace the existing file with current file?",
                     "File already exists", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     File.Delete(Set_File_Storage_String(yearID) + _filename);
@@ -146,7 +151,7 @@ namespace notes_app_csharp_wpf.Pages
 
             // file copies for both replacement and creation ... so 
             File.Copy(_filepath, Set_File_Storage_String(yearID) + _filename);
-            
+
             connection.Close();
 
             _pathExists = false;
@@ -198,6 +203,5 @@ namespace notes_app_csharp_wpf.Pages
 
             return isInputValid;
         }
-
     }
 }

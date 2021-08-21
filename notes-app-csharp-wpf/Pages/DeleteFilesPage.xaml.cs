@@ -34,8 +34,6 @@ namespace notes_app_csharp_wpf.Pages
 
             foreach (DataRow dtrow in dt.Rows)
             {
-
-
                 var sub = new MenuItem()
                 {
                     Title = dtrow["sem"].ToString(),
@@ -48,7 +46,6 @@ namespace notes_app_csharp_wpf.Pages
 
                 foreach (DataRow dtrow2 in s.Rows)
                 {
-
                     var year = new MenuItem()
                     {
                         Title = dtrow2["subject_name"].ToString(),
@@ -69,12 +66,14 @@ namespace notes_app_csharp_wpf.Pages
                             Title = dtrow3["year_number"].ToString(),
                             YearID = dtrow3["ID"].ToString()
                         });
-
                     }
+
                     sub.Items.Add(year);
                 }
+
                 sem.Items.Add(sub);
             }
+
             _ = MainList.Items.Add(sem);
 
             // load all files in the beginning
@@ -88,7 +87,6 @@ namespace notes_app_csharp_wpf.Pages
                 {
                     PathOfFile = dtrow["file_name"].ToString(),
                     YearID = dtrow["yearID"].ToString(),
-                    
                 });
             }
 
@@ -190,14 +188,8 @@ namespace notes_app_csharp_wpf.Pages
                             Set_Command("DELETE FROM semester WHERE sem='" + semesterID + "'");
                             _ = command.ExecuteNonQuery();
                         }
-
-
                     }
-                    
-
-
                 }
-
             }
 
 

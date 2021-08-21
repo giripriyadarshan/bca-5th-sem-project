@@ -11,15 +11,11 @@ namespace notes_app_csharp_wpf.Pages
     /// <summary>
     /// Interaction logic for SlideshowOrHomepage.xaml
     /// </summary>
-
     public partial class SlideshowOrHomepage
     {
-        
-
         public SlideshowOrHomepage()
         {
             InitializeComponent();
-            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -63,5 +59,4 @@ namespace notes_app_csharp_wpf.Pages
             isInCache = true;
         }
     }
-
 }
