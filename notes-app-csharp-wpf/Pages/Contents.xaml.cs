@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,78 +17,6 @@ namespace notes_app_csharp_wpf.Pages
         {
             InitializeComponent();
         }
-
-        //private HashSet<string> semesterSet = new HashSet<string>();
-
-        /*
-        
-        For every sem, add the subjects
-        For every subject in a sem, add the years
-        For every year in a sub, for a sem, add the papers
-
-        Sem
-        : primary key - sem numbers
-        
-        Sub
-        : ID
-        : subject names
-        : foriegn key - sem number
-        (No duplications of entire row)
-        Method?
-            : if select * from sub where subjectName=@subname and semNumber=@semnunmber returns 0 rows, then INSERT values
-        and extract the ID of the inserted row
-        else
-        extract the ID of the existing row
-        
-        Year
-        : ID
-        : year numbers
-        : subID Foriegn Key
-        (No duplications of entire row)
-        Method? 
-            : if SELECT * FROM year WHERE sem=@semester AND sub=@subject returns 0 rows, then INSERT INTO year (year, sem, sub) VALUES (@year, @sem, @sub)
-        and extract the ID of the inserted row
-        else
-        extract the ID of the existing row
-
-        Files
-        : ID
-        : Name
-        : yearID  
-
-        */
-
-        /*
-
-        //////////////////////////////////////////////////////////
-        /// probable method to implement collections
-        
-        ' select * from sem '
-
-        for each row in sem
-            add sem to list (new)
-            ' select * from sub where sem number = sem '
-
-            for each row in sub
-                add sub to sem's list (new)
-                ' select * from year where subID = ID '
-
-                for each row in year
-                    add year to sub's list
-
-        */
-
-        /*
-                    
-        // list all files
-
-        ' select * from files '
-        ListOfFiles.Title = row["name"]
-        ListOfFiles.yearID = row["yearID"]
-        // reason for yearId in the option?
-        segregate the file storage in folders named using yearID to avoid confusion among files with similar name
-
-         */
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -149,6 +76,27 @@ namespace notes_app_csharp_wpf.Pages
             }
             _ = MainList.Items.Add(sem);
 
+            // load all files in the beginning
+            var allfiles = new DataTable();
+            Set_Command("SELECT * FROM files");
+            _ = da.Fill(allfiles);
+
+            var icon = new Image
+            {
+                Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\" +
+                                                 "\\adobepdfimage.png"))
+            };
+
+            foreach (DataRow dtrow in allfiles.Rows)
+            {
+                _ = FileList.Items.Add(new ListOfFiles()
+                {
+                    PathOfFile = dtrow["file_name"].ToString(),
+                    YearID = dtrow["yearID"].ToString(),
+                    AdobePdfIcon = icon
+                });
+            }
+
             connection.Close();
         }
 
@@ -164,12 +112,19 @@ namespace notes_app_csharp_wpf.Pages
             connection.Open();
             _ = da.Fill(files);
 
+            var icon = new Image
+            {
+                Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\" +
+                                                 "\\adobepdfimage.png"))
+            };
+
             foreach (DataRow dtrow in files.Rows)
             {
                 _ = FileList.Items.Add(new ListOfFiles()
                 {
-                    PathOfFile = dtrow["filename"].ToString(),
-                    YearID = dtrow["yearID"].ToString()
+                    PathOfFile = dtrow["file_name"].ToString(),
+                    YearID = dtrow["yearID"].ToString(),
+                    AdobePdfIcon = icon
                 });
             }
 
@@ -181,7 +136,7 @@ namespace notes_app_csharp_wpf.Pages
             // if no item is selected, then it used to open the _fileStorage directory
             if (FileList.SelectedItem == null) return;
             var x = FileList.SelectedItem as ListOfFiles;
-            _ = System.Diagnostics.Process.Start(_fileStorage + x?.YearID + x?.PathOfFile);
+            _ = System.Diagnostics.Process.Start(Set_File_Storage_String(int.Parse(x.YearID)) + x.PathOfFile);
         }
     }
 
@@ -205,10 +160,6 @@ namespace notes_app_csharp_wpf.Pages
     {
         public string PathOfFile { get; set; }
         public string YearID { get; set; }
-        public static Image AdobePdfIcon = new Image
-        {
-            Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\" +
-                                                 "\\adobepdfimage.png"))
-        };
+        public Image AdobePdfIcon { get; set; }
 }
 }
