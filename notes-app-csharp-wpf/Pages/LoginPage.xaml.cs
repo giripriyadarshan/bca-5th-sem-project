@@ -16,14 +16,17 @@ namespace notes_app_csharp_wpf.Pages
 
         private void Login_button_OnClick(object sender, RoutedEventArgs e)
         {
-            connection.Open();
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
             var dt = new DataTable();
-            Set_Command("SELECT * FROM users WHERE username='" + UsernameInput.Text.Trim() + "'");
+            Set_Command("SELECT * FROM admin WHERE username='" + UsernameInput.Text.Trim() + "'");
             _ = da.Fill(dt);
 
             if (dt.Rows.Count > 0)
             {
-                if (dt.Rows[0][2].ToString() == PasswordInput.Password)
+                if (dt.Rows[0][1].ToString() == PasswordInput.Password)
                 {
                     adminLoginSession = true;
                     _ = NavigationService?.Navigate(new PostLoginMenuPage());

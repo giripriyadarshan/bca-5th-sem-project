@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using Path = System.IO.Path;
 using static notes_app_csharp_wpf.commons;
 using System.Windows.Media.Animation;
+using System.Data;
 
 namespace notes_app_csharp_wpf.Pages
 {
@@ -21,7 +22,6 @@ namespace notes_app_csharp_wpf.Pages
             InitializeComponent();
         }
 
-        // Directory.CreateDirectory(path);
         private void UploadButton_OnClick(object sender, RoutedEventArgs e)
         {
             var pdfFile = new OpenFileDialog
@@ -34,14 +34,10 @@ namespace notes_app_csharp_wpf.Pages
             // return if not true
             if (pdfFile.ShowDialog() != true) return;
 
-            // to see what we get as filename
-            // it appears that the entire file path is shown as filename
-            // so using Path.GetFileName we can extract filename only
             if (!pdfFile.CheckPathExists) return;
             _pathExists = true;
             _filepath = pdfFile.FileName;
             _filename = Path.GetFileName(_filepath);
-            _ = MessageBox.Show(_filename);
 
         }
 
@@ -49,28 +45,106 @@ namespace notes_app_csharp_wpf.Pages
         {
             if (!CheckForInvalidInput()) return;
 
-            _ = Directory.CreateDirectory(_fileStorage);
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
 
-            connection.Open();
+            // validate semester input
+            if (int.TryParse(SemesterInput.Text.Trim(), out _))
+            {
+                var sem = new DataTable();
+                Set_Command("Select * FROM semester WHERE sem='" + SemesterInput.Text.Trim() + "'");
+                _ = da.Fill(sem);
 
-            Set_Command("INSERT INTO subject(subject_name, semesterID) OUTPUT INSERTED.Id VALUES(@subject, @semester)");
-            _ = command.Parameters.AddWithValue("@subject", SubjectInput.Text.Trim());
-            _ = command.Parameters.AddWithValue("@semester", SemesterInput.Text.Trim());
+                if (!(sem.Rows.Count > 0))
+                {
+                    Set_Command("INSERT INTO semester(sem) VALUES(@semester)");
+                    _ = command.Parameters.AddWithValue("@semester", SemesterInput.Text.Trim());
+                    _ = command.ExecuteNonQuery();
+                }
+            }
+            else
+            {
+                _ = MessageBox.Show("Please input valid semester number in arithmetic digits i.e 6", "INVALID SEMESTER INPUT");
+                return;
+            }
 
-            var subjectId = command.ExecuteScalar();
+            // validate subject input
+            var sub = new DataTable();
+            int subjectID;
+            Set_Command("SELECT * FROM subject WHERE subject_name='" +
+                SubjectInput.Text.Trim().ToLower() +
+                "' AND semesterID='" + SemesterInput.Text.Trim() + "'");
+            _ = da.Fill(sub);
 
-            Set_Command("INSERT INTO year(year, subjectID, semesterID, filename) " +
-                        "VALUES(@year, @subjectID, @semesterID, @filename)");
-            _ = command.Parameters.AddWithValue("@year", YearInput.Text.Trim());
-            _ = command.Parameters.AddWithValue("@subjectID", subjectId.ToString());
-            _ = command.Parameters.AddWithValue("@semesterID", SemesterInput.Text.Trim());
-            _ = command.Parameters.AddWithValue("@filename", _filename);
+            if (sub.Rows.Count > 0)
+            {
+                subjectID = int.Parse(sub.Rows[0][0].ToString());
+            }
+            else
+            {
+                Set_Command("INSERT INTO subject(subject_name, semesterID) OUTPUT INSERTED.ID VALUES(@subject_name, @semesterID)");
+                _ = command.Parameters.AddWithValue("@subject_name", SubjectInput.Text.Trim().ToLower());
+                _ = command.Parameters.AddWithValue("@semesterID", SemesterInput.Text.Trim());
+                subjectID = int.Parse(command.ExecuteScalar().ToString());
+            }
 
-            _ = command.ExecuteNonQuery();
+            // validate year input
+            if (!int.TryParse(YearInput.Text.Trim(), out _))
+            {
+                _ = MessageBox.Show("Please enter valid year number in arithmetic digits i.e 2021", "INVALID YEAR INPUT");
+                return;
+            }
 
-            File.Copy(_filepath , _fileStorage + _filename);
+            var year = new DataTable();
+            int yearID;
+            Set_Command("SELECT * FROM year WHERE year_number='" + YearInput.Text.Trim() + "' AND subjectID='" + subjectID + "'");
+            _ = da.Fill(year);
 
+            if (year.Rows.Count > 0)
+            {
+                yearID = int.Parse(year.Rows[0][0].ToString());
+            }
+            else
+            {
+                Set_Command("INSERT INTO year(year_number, subjectID) OUTPUT INSERTED.ID VALUES(@year_number, @subjectID)");
+                _ = command.Parameters.AddWithValue("@year_number", YearInput.Text.Trim());
+                _ = command.Parameters.AddWithValue("@subjectID", subjectID);
+                yearID = int.Parse(command.ExecuteScalar().ToString());
+            }
+
+            // input for files table
+            _ = Directory.CreateDirectory(Set_File_Storage_String(yearID));
+            var files = new DataTable();
+            Set_Command("SELECT * FROM files WHERE file_name='" + _filename + "' AND yearID='" + yearID + "'");
+            _ = da.Fill(files);
+
+            if (files.Rows.Count > 0)
+            {
+                if (MessageBox.Show("File already exists in that period \nDo you want to replace the existing file with current file?",
+                    "File already exists", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    File.Delete(Set_File_Storage_String(yearID) + _filename);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                Set_Command("INSERT INTO files(file_name, yearID) VALUES(@file_name, @yearID)");
+                _ = command.Parameters.AddWithValue("@file_name", _filename);
+                _ = command.Parameters.AddWithValue("@yearID", yearID);
+                _ = command.ExecuteNonQuery();
+            }
+
+            // file copies for both replacement and creation ... so 
+            File.Copy(_filepath, Set_File_Storage_String(yearID) + _filename);
+            
             connection.Close();
+
             _pathExists = false;
             _ = NavigationService?.Navigate(new SuccessfullyAcceptedDocuments());
         }

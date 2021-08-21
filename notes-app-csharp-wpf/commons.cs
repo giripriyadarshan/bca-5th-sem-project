@@ -9,7 +9,8 @@ namespace notes_app_csharp_wpf
     class commons
     {
         // Database related
-        public static string connstring = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|vapdb.mdf;Integrated Security=True;Connect Timeout=30";
+        public static string connstring = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|desktopappdb.mdf;Integrated Security=True;Connect Timeout=30";
+
         public static SqlConnection connection = new SqlConnection(connstring);
         public static SqlCommand command = new SqlCommand();
         public static SqlDataAdapter da = new SqlDataAdapter(command);
@@ -22,7 +23,13 @@ namespace notes_app_csharp_wpf
 
         // Other stuffs
         public static bool adminLoginSession = false;
-        public static string _fileStorage = Environment.CurrentDirectory + "\\Resources\\" + "\\QPS\\";
+        
+        public static string Set_File_Storage_String(int yearID)
+        {
+            string _fileStorage = Environment.CurrentDirectory + "\\Resources\\" + "\\QPS\\";
+            _fileStorage += yearID + "\\";
+            return _fileStorage;
+        }
 
         // Images
         public static bool isInCache = false;
