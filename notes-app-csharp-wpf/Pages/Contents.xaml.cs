@@ -55,7 +55,7 @@ namespace notes_app_csharp_wpf.Pages
 
                     Set_Command(
                         "SELECT * FROM year WHERE " +
-                        "subjectID=" + dtrow2["ID"]
+                        "subjectID='" + dtrow2["ID"] + "' ORDER BY year_number ASC"
                     );
 
                     var y = new DataTable();
