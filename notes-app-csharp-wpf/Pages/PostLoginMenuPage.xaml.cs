@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static notes_app_csharp_wpf.commons;
 
 namespace notes_app_csharp_wpf.Pages
 {
@@ -28,6 +29,17 @@ namespace notes_app_csharp_wpf.Pages
         private void AddPapers_Click(object sender, RoutedEventArgs e)
         {
             _ = NavigationService?.Navigate(new AddContent());
+        }
+
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            adminLoginSession = false;
+            _ = NavigationService?.Navigate(new LoginPage());
+        }
+
+        private void DeletePapers_Click(object sender, RoutedEventArgs e)
+        {
+            _ = NavigationService?.Navigate(new DeleteFilesPage());
         }
     }
 }

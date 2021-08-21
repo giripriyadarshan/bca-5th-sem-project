@@ -37,22 +37,17 @@
 
             <Button x:Name="DeletePapers" Content="Delete Papers" 
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
-                    Grid.Column="0" Grid.Row="2"
+                    Grid.Column="0" Grid.Row="2" Click="DeletePapers_Click"
                     />
 
             <Button x:Name="AddPapers" Content="Add Papers"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
-                    Grid.Column="1" Grid.Row="2" Click="AddPapers_Click"
+                    Grid.Column="1" Grid.Row="3" Click="AddPapers_Click"
                     />
 
             <Button x:Name="GoBack" Content="Go back (Logout)"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
-                    Grid.Column="0" Grid.Row="4"
-                    />
-
-            <Button x:Name="ChangeSchema" Content="Change Schema"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
-                    Grid.Column="1" Grid.Row="4"
+                    Grid.Column="0" Grid.Row="4" Click="GoBack_Click"
                     />
 
         </Grid>
