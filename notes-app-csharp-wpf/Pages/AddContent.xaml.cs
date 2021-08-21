@@ -60,6 +60,7 @@ namespace notes_app_csharp_wpf.Pages
                 if (!(sem.Rows.Count > 0))
                 {
                     Set_Command("INSERT INTO semester(sem) VALUES(@semester)");
+                    command.Parameters.Clear();
                     _ = command.Parameters.AddWithValue("@semester", SemesterInput.Text.Trim());
                     _ = command.ExecuteNonQuery();
                 }
@@ -85,6 +86,7 @@ namespace notes_app_csharp_wpf.Pages
             else
             {
                 Set_Command("INSERT INTO subject(subject_name, semesterID) OUTPUT INSERTED.ID VALUES(@subject_name, @semesterID)");
+                command.Parameters.Clear();
                 _ = command.Parameters.AddWithValue("@subject_name", SubjectInput.Text.Trim().ToLower());
                 _ = command.Parameters.AddWithValue("@semesterID", SemesterInput.Text.Trim());
                 subjectID = int.Parse(command.ExecuteScalar().ToString());
@@ -109,6 +111,7 @@ namespace notes_app_csharp_wpf.Pages
             else
             {
                 Set_Command("INSERT INTO year(year_number, subjectID) OUTPUT INSERTED.ID VALUES(@year_number, @subjectID)");
+                command.Parameters.Clear();
                 _ = command.Parameters.AddWithValue("@year_number", YearInput.Text.Trim());
                 _ = command.Parameters.AddWithValue("@subjectID", subjectID);
                 yearID = int.Parse(command.ExecuteScalar().ToString());
@@ -135,6 +138,7 @@ namespace notes_app_csharp_wpf.Pages
             else
             {
                 Set_Command("INSERT INTO files(file_name, yearID) VALUES(@file_name, @yearID)");
+                command.Parameters.Clear();
                 _ = command.Parameters.AddWithValue("@file_name", _filename);
                 _ = command.Parameters.AddWithValue("@yearID", yearID);
                 _ = command.ExecuteNonQuery();
@@ -151,8 +155,7 @@ namespace notes_app_csharp_wpf.Pages
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            adminLoginSession = false;
-            _ = NavigationService?.Navigate(new LoginPage());
+            _ = NavigationService?.Navigate(new PostLoginMenuPage());
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

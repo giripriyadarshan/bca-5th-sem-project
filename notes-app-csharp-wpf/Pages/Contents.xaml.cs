@@ -93,7 +93,7 @@ namespace notes_app_csharp_wpf.Pages
                 {
                     PathOfFile = dtrow["file_name"].ToString(),
                     YearID = dtrow["yearID"].ToString(),
-                    AdobePdfIcon = icon
+                   
                 });
             }
 
@@ -109,14 +109,13 @@ namespace notes_app_csharp_wpf.Pages
             FileList.Items.Clear();
             var files = new DataTable();
             Set_Command("SELECT * FROM files WHERE yearID='" + selectedItem.YearID + "'");
-            connection.Open();
-            _ = da.Fill(files);
 
-            var icon = new Image
+            if (connection.State == ConnectionState.Closed)
             {
-                Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\Resources\\" + "\\Images\\" +
-                                                 "\\adobepdfimage.png"))
-            };
+                connection.Open();
+            }
+
+            _ = da.Fill(files);
 
             foreach (DataRow dtrow in files.Rows)
             {
@@ -124,7 +123,6 @@ namespace notes_app_csharp_wpf.Pages
                 {
                     PathOfFile = dtrow["file_name"].ToString(),
                     YearID = dtrow["yearID"].ToString(),
-                    AdobePdfIcon = icon
                 });
             }
 
@@ -160,6 +158,6 @@ namespace notes_app_csharp_wpf.Pages
     {
         public string PathOfFile { get; set; }
         public string YearID { get; set; }
-        public Image AdobePdfIcon { get; set; }
-}
+        public string ImagePath { get; } = @"E:\dotnet-practice\notes-app-csharp-wpf\notes-app-csharp-wpf\bin\Debug\Resources\Images\adobepdfimage.png";
+    }
 }
