@@ -1,8 +1,15 @@
-﻿using System;
+﻿using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Parser;
+using iText.Kernel.Pdf.Canvas.Parser.Listener;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 using static notes_app_csharp_wpf.commons;
 
@@ -17,6 +24,8 @@ namespace notes_app_csharp_wpf.Pages
         {
             InitializeComponent();
         }
+
+        public List<ListOfFiles> list = new List<ListOfFiles>();
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -72,20 +81,7 @@ namespace notes_app_csharp_wpf.Pages
             }
             _ = MainList.Items.Add(sem);
 
-            // load all files in the beginning
-            var allfiles = new DataTable();
-            Set_Command("SELECT * FROM files");
-            _ = da.Fill(allfiles);
-
-            foreach (DataRow dtrow in allfiles.Rows)
-            {
-                _ = FileList.Items.Add(new ListOfFiles()
-                {
-                    PathOfFile = dtrow["file_name"].ToString(),
-                    YearID = dtrow["yearID"].ToString(),
-
-                });
-            }
+            Add_All_Files();
 
             connection.Close();
         }
@@ -125,6 +121,86 @@ namespace notes_app_csharp_wpf.Pages
             if (FileList.SelectedItem == null) return;
             var x = FileList.SelectedItem as ListOfFiles;
             _ = System.Diagnostics.Process.Start(Set_File_Storage_String(int.Parse(x.YearID)) + x.PathOfFile);
+        }
+
+        private void Add_All_Files()
+        {
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+
+            // load all files in the beginning
+            var allfiles = new DataTable();
+            Set_Command("SELECT * FROM files");
+            _ = da.Fill(allfiles);
+
+
+            list.Clear();
+            FileList.Items.Clear();
+            foreach (DataRow dtrow in allfiles.Rows)
+            {
+                list.Add(new ListOfFiles()
+                {
+                    PathOfFile = dtrow["file_name"].ToString(),
+                    YearID = dtrow["yearID"].ToString(),
+
+                });
+            }
+
+            FileList.ItemsSource = list;
+
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
+        }
+
+        private string ReadFile(string pdfPath)
+        {
+            var pageText = new StringBuilder();
+            using (PdfDocument pdfDocument = new PdfDocument(new PdfReader(pdfPath)))
+            {
+                var pageNumbers = pdfDocument.GetNumberOfPages();
+                for (int i = 1; i <= pageNumbers; i++)
+                {
+                    LocationTextExtractionStrategy strategy = new LocationTextExtractionStrategy();
+                    PdfCanvasProcessor parser = new PdfCanvasProcessor(strategy);
+                    parser.ProcessPageContent(pdfDocument.GetFirstPage());
+                    pageText.Append(strategy.GetResultantText());
+                }
+            }
+            return pageText.ToString();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileList.ItemsSource = null;
+            FileList.Items.Clear();
+            if (!string.IsNullOrWhiteSpace(SearchBox.Text))
+            {
+                foreach (ListOfFiles i in list)
+                {
+                    string content = ReadFile(Set_File_Storage_String(int.Parse(i.YearID)) + i.PathOfFile);
+
+                    if (content.ToLower().Contains(SearchBox.Text.ToLower()))
+                    {
+                        _ = FileList.Items.Add(i);
+                    }
+                }
+            }
+            else
+            {
+                Add_All_Files();
+            }
+        }
+
+        private void SearchBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                SearchButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
         }
     }
 

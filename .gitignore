@@ -9,3 +9,5 @@ notes-app-csharp-wpf/bin/Debug/*
 
 notes-app-csharp-wpf/bin/Release/*
 !notes-app-csharp-wpf/bin/Release/*.mdf
+
+packages/
