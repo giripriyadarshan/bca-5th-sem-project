@@ -16,9 +16,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="113*"/>
-            <RowDefinition Height="113*"/>
-            <RowDefinition Height="190*"/>
+            <RowDefinition Height="41"/>
+            <RowDefinition />
+            <RowDefinition />
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
 
@@ -38,7 +38,7 @@
 
         <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" 
                      HorizontalContentAlignment="Center" Background="Transparent"
-                     Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="3"
+                     Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                  >
             <ListBox.ItemTemplate>
@@ -76,6 +76,24 @@
                 Grid.Row="3" Grid.Column="1"
                 Click="GoBack_Click"
                 />
+
+        <Border BorderBrush="Black"
+            BorderThickness="2" VerticalAlignment="Center" CornerRadius="5"
+                Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
+                >
+
+            <DockPanel Margin="5" >
+                <Button Width="35" x:Name="SearchButton" Click="SearchButton_Click">
+                    <Image Source="C:\Users\girip\Downloads\icons8-search-50.png" Stretch="Fill" />
+                </Button>
+
+                <TextBox x:Name="SearchBox" 
+                         Padding="3 0 0 0" BorderThickness="0" FontSize="20" 
+                         VerticalContentAlignment="Center"
+                         KeyDown="SearchBox_KeyDown"
+                         />
+            </DockPanel>
+        </Border>
 
     </Grid>
 </Page>

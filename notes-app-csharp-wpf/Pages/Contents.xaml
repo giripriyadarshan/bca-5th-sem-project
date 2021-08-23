@@ -16,13 +16,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="41"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="4">
+        <DockPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="5">
 
 
             <TreeView x:Name="MainList" DockPanel.Dock="Top" SelectedItemChanged="MainList_SelectedItemChanged" Background="Transparent" FontSize="22">
@@ -38,30 +39,49 @@
 
         <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" 
                      HorizontalContentAlignment="Center" Background="Transparent"
-                     Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3"
+                     Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                  >
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:ListOfFiles}">
                     <StackPanel Orientation="Vertical" Margin="20">
-                        <Image Source="{Binding ImagePath}" Width="80"/>
-                        <Label Content="{Binding PathOfFile}" />
+                        <Image Source="{Binding ImagePath}" Width="80" Margin="5"/>
+                        <TextBlock Text="{Binding PathOfFile}" TextWrapping="WrapWithOverflow"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True" Orientation="Horizontal"  />
+                    <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Width" Value="150" />
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
+
+        <Border BorderBrush="Black"
+            BorderThickness="2" VerticalAlignment="Center" CornerRadius="5"
+                Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
+                >
+
+            <DockPanel Margin="5" >
+                <Button Width="35" x:Name="SearchButton" Click="SearchButton_Click">
+                    <Image Source="C:\Users\girip\Downloads\icons8-search-50.png" Stretch="Fill" />
+                </Button>
+                
+                <TextBox x:Name="SearchBox" 
+                         Padding="3 0 0 0" BorderThickness="0" FontSize="20" 
+                         VerticalContentAlignment="Center"
+                         KeyDown="SearchBox_KeyDown"
+                         />
+            </DockPanel>
+        </Border>
 
     </Grid>
 </Page>

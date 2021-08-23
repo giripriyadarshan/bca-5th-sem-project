@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using static notes_app_csharp_wpf.commons;
 using System.Windows.Controls.Primitives;
 
@@ -77,18 +75,7 @@ namespace notes_app_csharp_wpf.Pages
             _ = MainList.Items.Add(sem);
 
             // load all files in the beginning
-            var allfiles = new DataTable();
-            Set_Command("SELECT * FROM files");
-            _ = da.Fill(allfiles);
-
-            foreach (DataRow dtrow in allfiles.Rows)
-            {
-                _ = FileList.Items.Add(new ListOfFiles()
-                {
-                    PathOfFile = dtrow["file_name"].ToString(),
-                    YearID = dtrow["yearID"].ToString(),
-                });
-            }
+            Add_All_Files(ref FileList);
 
             connection.Close();
         }
@@ -99,6 +86,7 @@ namespace notes_app_csharp_wpf.Pages
 
             if (selectedItem.YearID == null) return;
 
+            FileList.ItemsSource = null;
             FileList.Items.Clear();
             var files = new DataTable();
             Set_Command("SELECT * FROM files WHERE yearID='" + selectedItem.YearID + "'");
@@ -134,7 +122,7 @@ namespace notes_app_csharp_wpf.Pages
             var x = FileList.SelectedItem as ListOfFiles;
             const string deletefilestring = "Delete the file ";
             if (MessageBox.Show("are you sure ?",
-                deletefilestring + x.PathOfFile, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                deletefilestring + x?.PathOfFile, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 File.Delete(Set_File_Storage_String(int.Parse(x.YearID)) + x.PathOfFile);
 
@@ -199,6 +187,36 @@ namespace notes_app_csharp_wpf.Pages
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
             _ = NavigationService?.Navigate(new PostLoginMenuPage());
+        }
+
+        private void SearchBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                SearchButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileList.ItemsSource = null;
+            FileList.Items.Clear();
+            if (!string.IsNullOrWhiteSpace(SearchBox.Text))
+            {
+                foreach (ListOfFiles i in list)
+                {
+                    string content = ReadFile(Set_File_Storage_String(int.Parse(i.YearID)) + i.PathOfFile);
+
+                    if (content.ToLower().Contains(SearchBox.Text.ToLower()))
+                    {
+                        _ = FileList.Items.Add(i);
+                    }
+                }
+            }
+            else
+            {
+                Add_All_Files(ref FileList);
+            }
         }
     }
 }

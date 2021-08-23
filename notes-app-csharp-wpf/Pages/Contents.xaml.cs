@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Data;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+using System.Windows.Controls.Primitives;
 using static notes_app_csharp_wpf.commons;
 
 namespace notes_app_csharp_wpf.Pages
@@ -64,28 +62,17 @@ namespace notes_app_csharp_wpf.Pages
                             Title = dtrow3["year_number"].ToString(),
                             YearID = dtrow3["ID"].ToString()
                         });
-
                     }
+
                     sub.Items.Add(year);
                 }
+
                 sem.Items.Add(sub);
             }
+
             _ = MainList.Items.Add(sem);
 
-            // load all files in the beginning
-            var allfiles = new DataTable();
-            Set_Command("SELECT * FROM files");
-            _ = da.Fill(allfiles);
-
-            foreach (DataRow dtrow in allfiles.Rows)
-            {
-                _ = FileList.Items.Add(new ListOfFiles()
-                {
-                    PathOfFile = dtrow["file_name"].ToString(),
-                    YearID = dtrow["yearID"].ToString(),
-
-                });
-            }
+            Add_All_Files(ref FileList);
 
             connection.Close();
         }
@@ -96,6 +83,7 @@ namespace notes_app_csharp_wpf.Pages
 
             if (selectedItem.YearID == null) return;
 
+            FileList.ItemsSource = null;
             FileList.Items.Clear();
             var files = new DataTable();
             Set_Command("SELECT * FROM files WHERE yearID='" + selectedItem.YearID + "'");
@@ -126,6 +114,36 @@ namespace notes_app_csharp_wpf.Pages
             var x = FileList.SelectedItem as ListOfFiles;
             _ = System.Diagnostics.Process.Start(Set_File_Storage_String(int.Parse(x.YearID)) + x.PathOfFile);
         }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileList.ItemsSource = null;
+            FileList.Items.Clear();
+            if (!string.IsNullOrWhiteSpace(SearchBox.Text))
+            {
+                foreach (ListOfFiles i in list)
+                {
+                    string content = ReadFile(Set_File_Storage_String(int.Parse(i.YearID)) + i.PathOfFile);
+
+                    if (content.ToLower().Contains(SearchBox.Text.ToLower()))
+                    {
+                        _ = FileList.Items.Add(i);
+                    }
+                }
+            }
+            else
+            {
+                Add_All_Files(ref FileList);
+            }
+        }
+
+        private void SearchBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                SearchButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+        }
     }
 
     public class MenuItem
@@ -138,9 +156,6 @@ namespace notes_app_csharp_wpf.Pages
         }
 
         public string Title { get; set; }
-
-        // change index to sem and year seperately
-        // the purpose is to call the "year" query filtering duplicates and store the sem and sub to list all the files in that year
         public string YearID { get; set; }
     }
 
@@ -148,6 +163,8 @@ namespace notes_app_csharp_wpf.Pages
     {
         public string PathOfFile { get; set; }
         public string YearID { get; set; }
-        public string ImagePath { get; } = @"E:\dotnet-practice\notes-app-csharp-wpf\notes-app-csharp-wpf\bin\Debug\Resources\Images\adobepdfimage.png";
+
+        public string ImagePath =>
+            @"E:\dotnet-practice\notes-app-csharp-wpf\notes-app-csharp-wpf\bin\Debug\Resources\Images\adobepdfimage.png";
     }
 }
