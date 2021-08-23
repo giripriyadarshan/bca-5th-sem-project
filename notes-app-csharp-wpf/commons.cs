@@ -46,7 +46,6 @@ namespace notes_app_csharp_wpf
         public static readonly DispatcherTimer _pictureTimer = new DispatcherTimer();
         public static readonly Random _rand = new Random();
 
-
         // List all files
         public static List<ListOfFiles> list = new List<ListOfFiles>();
 

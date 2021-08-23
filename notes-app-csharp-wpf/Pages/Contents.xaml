@@ -72,7 +72,7 @@
 
             <DockPanel Margin="5" >
                 <Button Width="35" x:Name="SearchButton" Click="SearchButton_Click">
-                    <Image Source="C:\Users\girip\Downloads\icons8-search-50.png" Stretch="Fill" />
+                    <Image Source="search_icon.png" Stretch="Fill" />
                 </Button>
                 
                 <TextBox x:Name="SearchBox" 
