@@ -17,10 +17,10 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="41"/>
-            <RowDefinition Height="49*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="30*"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="5">
@@ -45,21 +45,22 @@
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:ListOfFiles}">
                     <StackPanel Orientation="Vertical" Margin="20">
-                        <Image Source="{Binding ImagePath}" Width="80"/>
-                        <Label Content="{Binding PathOfFile}" />
+                        <Image Source="{Binding ImagePath}" Width="80" Margin="5"/>
+                        <TextBlock Text="{Binding PathOfFile}" TextWrapping="WrapWithOverflow"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True" Orientation="Horizontal"  />
+                    <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Width" Value="150" />
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
