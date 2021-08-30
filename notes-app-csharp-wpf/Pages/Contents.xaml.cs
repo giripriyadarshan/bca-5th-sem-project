@@ -163,8 +163,5 @@ namespace notes_app_csharp_wpf.Pages
     {
         public string PathOfFile { get; set; }
         public string YearID { get; set; }
-
-        public string ImagePath =>
-            @"E:\dotnet-practice\notes-app-csharp-wpf\notes-app-csharp-wpf\bin\Debug\Resources\Images\adobepdfimage.png";
     }
 }

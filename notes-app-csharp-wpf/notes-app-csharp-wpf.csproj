@@ -230,5 +230,8 @@
   <ItemGroup>
     <Resource Include="Pages\LocalResources\search_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pages\LocalResources\adobepdfimage.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

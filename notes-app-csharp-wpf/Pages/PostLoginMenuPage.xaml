@@ -22,13 +22,6 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            
-            <!--
-            1. AddContents
-            2. DeleteContents
-            3. AddorRemoveDataBaseSchemaContent (Like Semester and Subjects)
-            4. go-back (Logout)
-            -->
 
             <TextBlock Text="Admin Login" FontSize="43" FontWeight="DemiBold"
                        Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" 
