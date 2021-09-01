@@ -13,7 +13,7 @@ using notes_app_csharp_wpf.Pages;
 
 namespace notes_app_csharp_wpf
 {
-    class commons
+    public class commons
     {
         // Database related
         private static string connstring =
