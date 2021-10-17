@@ -44,7 +44,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:ListOfFiles}">
                     <StackPanel Orientation="Vertical" Margin="20">
-                        <Image Source="{Binding ImagePath}" Width="80"/>
+                        <Image Source="LocalResources\adobepdfimage.png" Width="80" Margin="5"/>
                         <Label Content="{Binding PathOfFile}" />
                     </StackPanel>
                 </DataTemplate>
