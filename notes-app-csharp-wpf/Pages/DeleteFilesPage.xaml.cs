@@ -77,7 +77,10 @@ namespace notes_app_csharp_wpf.Pages
             // load all files in the beginning
             Add_All_Files(ref FileList);
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         private void MainList_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -107,7 +110,10 @@ namespace notes_app_csharp_wpf.Pages
                 });
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         private void FileList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

@@ -42,7 +42,10 @@ namespace notes_app_csharp_wpf.Pages
                 _ = MessageBox.Show("Invalid Username");
             }
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

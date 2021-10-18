@@ -152,7 +152,10 @@ namespace notes_app_csharp_wpf.Pages
             // file copies for both replacement and creation ... so 
             File.Copy(_filepath, Set_File_Storage_String(yearID) + _filename);
 
-            connection.Close();
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
 
             _pathExists = false;
             _ = NavigationService?.Navigate(new SuccessfullyAcceptedDocuments());
