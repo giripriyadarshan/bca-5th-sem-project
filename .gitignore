@@ -1,13 +1,13 @@
 ## Ignore Visual Studio temporary files, build results, and
-notes-app-csharp-wpf/obj/
-notes-app-csharp-wpf/*.user
+PYQ_Papers/obj/
+PYQ_Papers/*.user
 .*
 
-notes-app-csharp-wpf/bin/Debug/*
-!notes-app-csharp-wpf/bin/Debug/*.mdf
-!notes-app-csharp-wpf/bin/Debug/Resources
+PYQ_Papers/bin/Debug/*
+!PYQ_Papers/bin/Debug/*.mdf
+!PYQ_Papers/bin/Debug/Resources
 
-notes-app-csharp-wpf/bin/Release/*
-!notes-app-csharp-wpf/bin/Release/*.mdf
+PYQ_Papers/bin/Release/*
+!PYQ_Papers/bin/Release/*.mdf
 
 packages/

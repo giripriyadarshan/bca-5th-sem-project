@@ -1,0 +1,53 @@
+﻿<Window x:Class="PYQ_Papers.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Previous Years Question Papers" 
+        Height="450" Width="800" MinHeight="300" MinWidth="400"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="ico.png">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="198*"/>
+            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="161*"/>
+            <ColumnDefinition Width="198*"/>
+            <ColumnDefinition Width="198*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23"/>
+            <RowDefinition Height="145*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="84*"/>
+            <RowDefinition Height="84*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Background="Gray" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" >
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Page">
+                    <MenuItem Header="Home" Click="MenuItem_Click" />
+                    <MenuItem Header="Login" Click="MenuItem_Click_1" />
+                    <MenuItem Header="About" Click="MenuItem_OnClick" />
+                    <Separator />
+                    <MenuItem Header="Exit" Click="MenuItem_Click_2" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="4" x:Name="MainFrame" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" />
+        
+    </Grid>
+
+    <Window.Resources>
+        <Storyboard x:Key="TextBoxAnimation">
+            <ColorAnimation 
+                From="Transparent" To="Red"
+                Duration="0:0:0.1" 
+                AutoReverse="True" 
+                RepeatBehavior="0:0:0.4"
+                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                />
+        </Storyboard>
+    </Window.Resources>
+</Window>
