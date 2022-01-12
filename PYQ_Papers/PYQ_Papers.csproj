@@ -129,6 +129,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AdminProfileSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Contents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -160,6 +164,9 @@
     </Compile>
     <Compile Include="Pages\AddContent.xaml.cs">
       <DependentUpon>AddContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminProfileSettings.xaml.cs">
+      <DependentUpon>AdminProfileSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Contents.xaml.cs">
       <DependentUpon>Contents.xaml</DependentUpon>

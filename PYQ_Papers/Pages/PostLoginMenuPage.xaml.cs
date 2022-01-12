@@ -30,5 +30,10 @@ namespace PYQ_Papers.Pages
         {
             _ = NavigationService?.Navigate(new DeleteFilesPage());
         }
+
+        private void AdminSettings_Click(object sender, RoutedEventArgs e)
+        {
+            _ = NavigationService?.Navigate(new AdminProfileSettings());
+        }
     }
 }
