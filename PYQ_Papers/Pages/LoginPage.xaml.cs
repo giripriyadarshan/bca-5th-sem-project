@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Windows;
 using static PYQ_Papers.commons;
+using static PYQ_Papers.Session;
 
 namespace PYQ_Papers.Pages
 {
@@ -29,7 +30,8 @@ namespace PYQ_Papers.Pages
             {
                 if (dt.Rows[0][1].ToString() == PasswordInput.Password)
                 {
-                    adminLoginSession = true;
+                    adminId = dt.Rows[0][0].ToString();
+                    isLoggedIn = true;
                     _ = NavigationService?.Navigate(new PostLoginMenuPage());
                 }
                 else
@@ -50,7 +52,7 @@ namespace PYQ_Papers.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (adminLoginSession)
+            if (isLoggedIn)
             {
                 _ = NavigationService?.Navigate(new PostLoginMenuPage());
             }

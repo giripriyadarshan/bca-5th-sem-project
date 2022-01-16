@@ -29,9 +29,6 @@ namespace PYQ_Papers
             command.CommandText = query;
         }
 
-        // Other stuffs
-        public static bool adminLoginSession = false;
-
         public static string Set_File_Storage_String(int yearID)
         {
             var _fileStorage = Environment.CurrentDirectory + "\\Resources\\" + "\\QPS\\";
@@ -100,4 +97,11 @@ namespace PYQ_Papers
             return pageText.ToString();
         }
     }
+
+    public static class Session
+    {
+        public static string adminId = null;
+        public static bool isLoggedIn = false;
+    }
+
 }

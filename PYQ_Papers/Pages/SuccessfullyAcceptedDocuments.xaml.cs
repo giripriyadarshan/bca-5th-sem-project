@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using static PYQ_Papers.commons;
+using static PYQ_Papers.Session;
 
 namespace PYQ_Papers.Pages
 {
@@ -15,7 +15,8 @@ namespace PYQ_Papers.Pages
 
         private void contents_Click(object sender, RoutedEventArgs e)
         {
-            adminLoginSession = false;
+            adminId = null;
+            isLoggedIn = false;
             _ = NavigationService?.Navigate(new Contents());
         }
 

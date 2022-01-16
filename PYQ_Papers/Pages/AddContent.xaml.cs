@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.Win32;
 using Path = System.IO.Path;
 using static PYQ_Papers.commons;
+using static PYQ_Papers.Session;
 using System.Windows.Media.Animation;
 using System.Data;
 
@@ -168,7 +169,7 @@ namespace PYQ_Papers.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!adminLoginSession)
+            if (!isLoggedIn)
             {
                 _ = NavigationService?.Navigate(new LoginPage());
             }

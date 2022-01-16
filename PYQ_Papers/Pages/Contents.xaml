@@ -74,7 +74,7 @@
                 <Button Width="35" x:Name="SearchButton" Click="SearchButton_Click" Cursor="Hand">
                     <Image Source="LocalResources\search_icon.png" Stretch="Fill" />
                 </Button>
-                
+
                 <TextBox x:Name="SearchBox" 
                          Padding="3 0 0 0" BorderThickness="0" FontSize="20" 
                          VerticalContentAlignment="Center"
