@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using static PYQ_Papers.commons;
+using static PYQ_Papers.Session;
 
 namespace PYQ_Papers
 {
@@ -40,7 +40,9 @@ namespace PYQ_Papers
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            adminLoginSession = false;
+            adminId = -1;
+            adminName = null;
+            isLoggedIn = false;
         }
 
         private void MainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)

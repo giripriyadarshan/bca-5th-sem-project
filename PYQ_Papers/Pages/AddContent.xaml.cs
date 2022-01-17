@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.Win32;
 using Path = System.IO.Path;
 using static PYQ_Papers.commons;
+using static PYQ_Papers.Session;
 using System.Windows.Media.Animation;
 using System.Data;
 
@@ -130,8 +131,8 @@ namespace PYQ_Papers.Pages
             if (files.Rows.Count > 0)
             {
                 if (MessageBox.Show(
-                    "File already exists in that period \nDo you want to replace the existing file with current file?",
-                    "File already exists", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        "File already exists in that period \nDo you want to replace the existing file with current file?",
+                        "File already exists", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     File.Delete(Set_File_Storage_String(yearID) + _filename);
                 }
@@ -168,7 +169,7 @@ namespace PYQ_Papers.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!adminLoginSession)
+            if (!isLoggedIn)
             {
                 _ = NavigationService?.Navigate(new LoginPage());
             }

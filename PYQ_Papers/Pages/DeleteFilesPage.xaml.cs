@@ -128,7 +128,7 @@ namespace PYQ_Papers.Pages
             var x = FileList.SelectedItem as ListOfFiles;
             const string deletefilestring = "Delete the file ";
             if (MessageBox.Show("are you sure ?",
-                deletefilestring + x?.PathOfFile, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    deletefilestring + x?.PathOfFile, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 File.Delete(Set_File_Storage_String(int.Parse(x.YearID)) + x.PathOfFile);
 

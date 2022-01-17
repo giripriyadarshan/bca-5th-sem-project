@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-
-using static PYQ_Papers.commons;
+using static PYQ_Papers.Session;
 
 namespace PYQ_Papers.Pages
 {
@@ -22,13 +21,20 @@ namespace PYQ_Papers.Pages
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            adminLoginSession = false;
+            adminId = -1;
+            adminName = null;
+            isLoggedIn = false;
             _ = NavigationService?.Navigate(new LoginPage());
         }
 
         private void DeletePapers_Click(object sender, RoutedEventArgs e)
         {
             _ = NavigationService?.Navigate(new DeleteFilesPage());
+        }
+
+        private void AdminSettings_Click(object sender, RoutedEventArgs e)
+        {
+            _ = NavigationService?.Navigate(new AdminProfileSettings());
         }
     }
 }
