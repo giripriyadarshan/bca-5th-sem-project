@@ -1,22 +1,22 @@
 ﻿<Page x:Class="PYQ_Papers.Pages.Contents"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:PYQ_Papers.Pages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Contents" Loaded="Page_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="41"/>
+            <RowDefinition Height="41" />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -26,7 +26,8 @@
         <DockPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="5">
 
 
-            <TreeView x:Name="MainList" DockPanel.Dock="Top" SelectedItemChanged="MainList_SelectedItemChanged" Background="Transparent" FontSize="22">
+            <TreeView x:Name="MainList" DockPanel.Dock="Top" SelectedItemChanged="MainList_SelectedItemChanged"
+                      Background="Transparent" FontSize="22">
 
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type local:MenuItem}" ItemsSource="{Binding Items}">
@@ -37,16 +38,15 @@
             </TreeView>
         </DockPanel>
 
-        <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" 
-                     HorizontalContentAlignment="Center" Background="Transparent"
-                     Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                 >
+        <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick"
+                 HorizontalContentAlignment="Center" Background="Transparent"
+                 Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:ListOfFiles}">
                     <StackPanel Orientation="Vertical" Margin="20">
-                        <Image Source="LocalResources\adobepdfimage.png" Width="80" Margin="5"/>
-                        <TextBlock Text="{Binding PathOfFile}" TextWrapping="WrapWithOverflow"/>
+                        <Image Source="LocalResources\adobepdfimage.png" Width="80" Margin="5" />
+                        <TextBlock Text="{Binding PathOfFile}" TextWrapping="WrapWithOverflow" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -59,27 +59,25 @@
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Margin" Value="5" />
                     <Setter Property="Width" Value="150" />
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
 
         <Border BorderBrush="Black"
-            BorderThickness="2" VerticalAlignment="Center" CornerRadius="5"
-                Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
-                >
+                BorderThickness="2" VerticalAlignment="Center" CornerRadius="5"
+                Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
 
-            <DockPanel Margin="5" >
+            <DockPanel Margin="5">
                 <Button Width="35" x:Name="SearchButton" Click="SearchButton_Click" Cursor="Hand">
                     <Image Source="LocalResources\search_icon.png" Stretch="Fill" />
                 </Button>
 
-                <TextBox x:Name="SearchBox" 
-                         Padding="3 0 0 0" BorderThickness="0" FontSize="20" 
+                <TextBox x:Name="SearchBox"
+                         Padding="3 0 0 0" BorderThickness="0" FontSize="20"
                          VerticalContentAlignment="Center"
-                         KeyDown="SearchBox_KeyDown"
-                         />
+                         KeyDown="SearchBox_KeyDown" />
             </DockPanel>
         </Border>
 

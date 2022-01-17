@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-
 using static PYQ_Papers.Session;
 
 namespace PYQ_Papers.Pages
@@ -22,7 +21,8 @@ namespace PYQ_Papers.Pages
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            adminId = null;
+            adminId = -1;
+            adminName = null;
             isLoggedIn = false;
             _ = NavigationService?.Navigate(new LoginPage());
         }

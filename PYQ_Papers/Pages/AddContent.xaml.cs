@@ -131,8 +131,8 @@ namespace PYQ_Papers.Pages
             if (files.Rows.Count > 0)
             {
                 if (MessageBox.Show(
-                    "File already exists in that period \nDo you want to replace the existing file with current file?",
-                    "File already exists", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        "File already exists in that period \nDo you want to replace the existing file with current file?",
+                        "File already exists", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     File.Delete(Set_File_Storage_String(yearID) + _filename);
                 }

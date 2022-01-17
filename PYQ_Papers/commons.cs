@@ -100,8 +100,8 @@ namespace PYQ_Papers
 
     public static class Session
     {
-        public static string adminId = null;
+        public static int adminId = -1;
+        public static string adminName = null;
         public static bool isLoggedIn = false;
     }
-
 }

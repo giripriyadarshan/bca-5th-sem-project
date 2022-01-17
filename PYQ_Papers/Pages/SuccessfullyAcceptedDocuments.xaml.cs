@@ -15,7 +15,8 @@ namespace PYQ_Papers.Pages
 
         private void contents_Click(object sender, RoutedEventArgs e)
         {
-            adminId = null;
+            adminId = -1;
+            adminName = null;
             isLoggedIn = false;
             _ = NavigationService?.Navigate(new Contents());
         }

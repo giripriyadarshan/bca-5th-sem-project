@@ -125,11 +125,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AddAdminAuth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AddContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AdminProfileSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ChangeAdminAuth.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,11 +170,17 @@
     <Compile Include="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddAdminAuth.xaml.cs">
+      <DependentUpon>AddAdminAuth.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddContent.xaml.cs">
       <DependentUpon>AddContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdminProfileSettings.xaml.cs">
       <DependentUpon>AdminProfileSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ChangeAdminAuth.xaml.cs">
+      <DependentUpon>ChangeAdminAuth.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Contents.xaml.cs">
       <DependentUpon>Contents.xaml</DependentUpon>

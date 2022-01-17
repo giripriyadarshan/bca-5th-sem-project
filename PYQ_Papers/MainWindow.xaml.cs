@@ -40,7 +40,8 @@ namespace PYQ_Papers
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            adminId = null;
+            adminId = -1;
+            adminName = null;
             isLoggedIn = false;
         }
 

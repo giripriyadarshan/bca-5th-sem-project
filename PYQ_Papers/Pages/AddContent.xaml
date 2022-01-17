@@ -8,78 +8,82 @@
       Title="AddContent" Loaded="Page_Loaded">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-    <Grid>
+        <Grid>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"
-                   VerticalAlignment="Center">
-            <TextBlock Text="Add Papers" FontSize="54" />
-        </DockPanel>
+            <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                <TextBlock Text="Add Papers" FontSize="54" />
+            </DockPanel>
 
-        <Label Grid.Column="0" Grid.Row="1" Content="Semester:"
-               Margin="10,5" FontSize="24"
-               VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
-               HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <TextBox Grid.Column="1" Grid.Row="1" x:Name="SemesterInput"
-                 Margin="10,5" Width="150" FontSize="24"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
-                 HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Label Grid.Column="0" Grid.Row="1" Content="Semester:"
+                   Margin="10,5" FontSize="24"
+                   VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
+                   HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="1" x:Name="SemesterInput"
+                     Margin="10,5" Width="150" FontSize="24"
+                     VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                     HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <Label Grid.Column="0" Grid.Row="2" Content="Subject:"
-               Margin="10,5" FontSize="24"
-               VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
-               HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Column="0" Grid.Row="2" Content="Subject:"
+                   Margin="10,5" FontSize="24"
+                   VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
+                   HorizontalAlignment="Right" VerticalAlignment="Center" />
 
-        <TextBox Grid.Column="1" Grid.Row="2" x:Name="SubjectInput"
-                 Margin="10,5" Width="150" FontSize="24"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
-                 HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="2" x:Name="SubjectInput"
+                     Margin="10,5" Width="150" FontSize="24"
+                     VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                     HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <Label Grid.Column="0" Grid.Row="3" Content="Year:"
-               Margin="10,5" FontSize="24"
-               VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
-               HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Column="0" Grid.Row="3" Content="Year:"
+                   Margin="10,5" FontSize="24"
+                   VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
+                   HorizontalAlignment="Right" VerticalAlignment="Center" />
 
-        <TextBox Grid.Column="1" Grid.Row="3" x:Name="YearInput"
-                 Margin="10,5" Width="150" FontSize="24"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
-                 HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="3" x:Name="YearInput"
+                     Margin="10,5" Width="150" FontSize="24"
+                     VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                     HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <Label Grid.Column="0" Grid.Row="4" Content="Upload File:"
-               Margin="10,5" FontSize="24"
-               VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
-               HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <Label Grid.Column="0" Grid.Row="4" Content="Upload File:"
+                   Margin="10,5" FontSize="24"
+                   VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
+                   HorizontalAlignment="Right" VerticalAlignment="Center" />
 
-            <Button Grid.Column="1" Grid.Row="4" Content="Upload" Click="UploadButton_OnClick" x:Name="UploadButton" Cursor="Hand"
-                Margin="10,5" Width="150" FontSize="20"
-                VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Button Grid.Column="1" Grid.Row="4" Content="Upload" Click="UploadButton_OnClick" x:Name="UploadButton"
+                    Cursor="Hand"
+                    Margin="10,5" Width="150" FontSize="20"
+                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    Style="{StaticResource btnBlue}" />
 
             <StackPanel Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                        HorizontalAlignment="Center">
 
                 <Button x:Name="Close" Content="Close" Click="Close_Click" Cursor="Hand"
-                    Width="200" Height="40" Margin="10,10" FontSize="24" FontWeight="Bold"/>
+                        Width="200" Height="40" Margin="10,10" FontSize="24" FontWeight="Bold"
+                        Style="{StaticResource btnBlue}" />
 
                 <Button x:Name="SubmitButton" Content="Submit" Click="SubmitButton_OnClick" Cursor="Hand"
-                    Width="200" Height="40" Margin="10,10" FontSize="24" FontWeight="Bold"/>
+                        Width="200" Height="40" Margin="10,10" FontSize="24" FontWeight="Bold"
+                        Style="{StaticResource btnBlue}" />
 
             </StackPanel>
-       
-        
+
+
         </Grid>
     </ScrollViewer>
-    
+
 </Page>
