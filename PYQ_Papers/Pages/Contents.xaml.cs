@@ -125,6 +125,18 @@ namespace PYQ_Papers.Pages
              * increments cant be reset, disabled or decreased
              */
             //
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+
+            Set_Command("UPDATE files SET no_of_times_opened=no_of_times_opened+1 WHERE yearID='" + x.YearID + "' AND file_name='" + x.PathOfFile + "'");
+            _ = command.ExecuteNonQuery();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                connection.Close();
+            }
             _ = System.Diagnostics.Process.Start(Set_File_Storage_String(int.Parse(x.YearID)) + x.PathOfFile);
         }
 
