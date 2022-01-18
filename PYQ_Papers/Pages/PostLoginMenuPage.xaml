@@ -29,7 +29,7 @@
 
             <Button x:Name="DeletePapers" Content="Delete Papers"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
-                    Grid.Column="0" Grid.Row="2" Click="DeletePapers_Click"
+                    Grid.Column="1" Grid.Row="2" Click="DeletePapers_Click"
                     Style="{StaticResource btnBlue}" />
 
             <Button x:Name="AddPapers" Content="Add Papers"
@@ -39,7 +39,12 @@
 
             <Button x:Name="AdminSettings" Content="Admin Settings"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
-                    Grid.Column="1" Grid.Row="2" Click="AdminSettings_Click"
+                    Grid.Column="0" Grid.Row="2" Click="AdminSettings_Click"
+                    Style="{StaticResource btnBlue}" />
+            
+            <Button x:Name="ContentDetails" Content="Content Details"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
+                    Grid.Column="1" Grid.Row="3" Click="ContentDetails_Click"
                     Style="{StaticResource btnBlue}" />
 
             <Button x:Name="GoBack" Content="Go back (Logout)"
