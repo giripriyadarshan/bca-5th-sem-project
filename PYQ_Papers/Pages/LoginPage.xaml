@@ -22,24 +22,22 @@
         <DockPanel Grid.Column="1" Grid.Row="0">
             <Label Content="LOGIN" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center"
                    FontSize="65" Margin="0" Width="790" HorizontalContentAlignment="Center"
-                   VerticalContentAlignment="Center" FontWeight="Bold" FontFamily="Segoe Script" />
+                   VerticalContentAlignment="Center" FontWeight="Bold" Style="{StaticResource TextGeneral}" />
         </DockPanel>
 
         <Canvas Grid.Column="1" Grid.Row="1" Margin="20,20">
 
             <!-- Convert Canvas into Grid and allot labels and textboxes accordingly, and try to wrap all elements to scrollviewer to enable scrolling -->
 
-            <Label Content="Username: " FontSize="24" />
-            <TextBox x:Name="UsernameInput" Width="146" FontSize="24" Canvas.Left="158" Canvas.Top="8" />
+            <Label Content="Username: " FontSize="24" Style="{StaticResource TextGeneral}" />
+            <TextBox x:Name="UsernameInput" Width="146" FontSize="24" Canvas.Left="158" Canvas.Top="8" Style="{StaticResource TransparentStyle}"/>
 
-            <Label Content="Password: " FontSize="24" Canvas.Top="76" />
-            <PasswordBox x:Name="PasswordInput" FontSize="24" Width="146" Canvas.Left="158" Canvas.Top="84" />
+            <Label Content="Password: " FontSize="24" Canvas.Top="76" Style="{StaticResource TextGeneral}" />
+            <PasswordBox x:Name="PasswordInput" FontSize="24" Width="146" Canvas.Left="158" Canvas.Top="84" Style="{StaticResource TransparentStyle}" />
 
             <Button x:Name="LoginButton" Content="Login" Canvas.Top="209" FontSize="35" Width="327" FontWeight="Bold"
                     Click="Login_button_OnClick"
-                    Style="{StaticResource btnBlue}" Canvas.Left="5" />
-
-
+                    Style="{StaticResource btnGeneral}" Canvas.Left="5" />
         </Canvas>
     </Grid>
 </Page>

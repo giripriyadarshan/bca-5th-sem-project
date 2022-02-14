@@ -24,34 +24,34 @@
 
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                Content="Add Auth Details" FontSize="40" FontWeight="Bold"
-               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource TextGeneral}" />
 
         <Label Grid.Row="1" Grid.Column="0"
                Content="Username:" FontSize="25" Margin="0 0 20 0"
-               HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+               HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Style="{StaticResource TextGeneral}"/>
 
         <TextBox x:Name="adminUsername" Grid.Row="1" Grid.Column="1"
-                 Margin="20" Height="27" FontSize="25" />
+                 Margin="20" Height="27" FontSize="25" Style="{StaticResource TransparentStyle}"/>
 
         <Label Grid.Row="2" Grid.Column="0"
                Content="Password:" FontSize="25" Margin="0 0 20 0"
-               HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+               HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Style="{StaticResource TextGeneral}" />
 
         <TextBox x:Name="adminPassword" Grid.Row="2" Grid.Column="1"
-                 Margin="20" Height="27" FontSize="25" />
+                 Margin="20" Height="27" FontSize="25" Style="{StaticResource TransparentStyle}" />
 
         <Button x:Name="Cancel" Content="Cancel" Grid.Row="3" Grid.Column="0"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 Height="45" Width="200" FontSize="25" HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 Click="Cancel_Click"
-                Style="{StaticResource btnBlue}" />
+                Style="{StaticResource btnGeneral}" />
         <Button x:Name="Add" Content="Add" Grid.Row="3" Grid.Column="1"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 Height="45" Width="200" FontSize="25" HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 Click="Add_Click"
-                Style="{StaticResource btnBlue}" />
+                Style="{StaticResource btnGeneral}" />
 
     </Grid>
 </Page>

@@ -26,11 +26,11 @@
 
 
             <TreeView x:Name="MainList" DockPanel.Dock="Top" SelectedItemChanged="MainList_SelectedItemChanged"
-                      Background="Transparent" FontSize="22">
+                      Background="Transparent" FontSize="22" ItemContainerStyle="{StaticResource TreeItemStyle}">
 
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type local:MenuItem}" ItemsSource="{Binding Items}">
-                        <TextBlock Text="{Binding Title}" />
+                        <TextBlock Text="{Binding Title}"  Style="{StaticResource TextBlockStyle}"/>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
 
@@ -40,12 +40,12 @@
         <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick"
                  HorizontalContentAlignment="Center" Background="Transparent"
                  Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource TransparentStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:ListOfFiles}">
                     <StackPanel Orientation="Vertical" Margin="20">
                         <Image Source="LocalResources\adobepdfimage.png" Width="80" Margin="5" />
-                        <Label Content="{Binding PathOfFile}" />
+                        <Label Content="{Binding PathOfFile}" Style="{StaticResource TextGeneral}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -68,28 +68,28 @@
                 FontWeight="DemiBold"
                 Grid.Row="3" Grid.Column="3"
                 Click="DeleteButton_Click"
-                Style="{StaticResource btnBlue}" />
+                Style="{StaticResource btnGeneral}" />
 
         <Button x:Name="GoBack" Content="Go Back"
                 Margin="5,5,5,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                 FontWeight="DemiBold"
                 Grid.Row="3" Grid.Column="1"
                 Click="GoBack_Click"
-                Style="{StaticResource btnBlue}" />
+                Style="{StaticResource btnGeneral}" />
 
         <Border BorderBrush="Black"
                 BorderThickness="2" VerticalAlignment="Center" CornerRadius="5" Grid.Column="1" Grid.ColumnSpan="3"
                 Height="41">
 
             <DockPanel Margin="5">
-                <Button Width="35" x:Name="SearchButton" Click="SearchButton_Click">
-                    <Image Source="LocalResources\search_icon.png" Stretch="Fill" />
+                <Button Width="35" x:Name="SearchButton" Click="SearchButton_Click" Cursor="Hand" Background="Transparent">
+                    <Image Source="LocalResources\search_icon.png" Stretch="Fill"/>
                 </Button>
 
                 <TextBox x:Name="SearchBox"
                          Padding="3 0 0 0" BorderThickness="0" FontSize="20"
                          VerticalContentAlignment="Center"
-                         KeyDown="SearchBox_KeyDown" />
+                         KeyDown="SearchBox_KeyDown" Style="{StaticResource TransparentStyle}"/>
             </DockPanel>
         </Border>
 

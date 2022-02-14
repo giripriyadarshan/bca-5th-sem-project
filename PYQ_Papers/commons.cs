@@ -4,8 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
@@ -35,13 +33,6 @@ namespace PYQ_Papers
             _fileStorage += yearID + "\\";
             return _fileStorage;
         }
-
-        // Images
-        public static bool isInCache = false;
-        public static readonly List<BitmapImage> _images = new List<BitmapImage>();
-        public static int _imageNumber;
-        public static readonly DispatcherTimer _pictureTimer = new DispatcherTimer();
-        public static readonly Random _rand = new Random();
 
         // List all files
         public static List<ListOfFiles> list = new List<ListOfFiles>();

@@ -18,22 +18,22 @@ namespace PYQ_Papers
             _ = MainFrame.NavigationService.Navigate(new Pages.SlideshowOrHomepage());
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void Home_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             _ = MainFrame.NavigationService.Navigate(new Pages.SlideshowOrHomepage());
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        private void Login_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             _ = MainFrame.NavigationService.Navigate(new Pages.LoginPage());
         }
 
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        private void About_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             _ = MainFrame.NavigationService.Navigate(new Pages.AboutPage());
         }
@@ -51,6 +51,11 @@ namespace PYQ_Papers
             {
                 _ = MainFrame.RemoveBackEntry();
             }
+        }
+
+        private void Content_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            _ = MainFrame.NavigationService.Navigate(new Pages.Contents());
         }
     }
 }

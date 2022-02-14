@@ -4,8 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="SlideshowOrHomepage" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="SlideshowOrHomepage" Unloaded="Page_Unloaded" Loaded="Page_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,28 +21,26 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Center"
-                   VerticalAlignment="Center">
-            <Label Content="Welcome" FontSize="45" FontWeight="Bold" />
-        </DockPanel>
-
-        <!-- Replace the image slideshow with relevant control/description/etc -->
-        <Image Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Stretch="Fill" x:Name="SlideshowBlock"></Image>
-
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="2"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    >
+            <Label Content="P Y Q" FontSize="95" FontWeight="Bold" Style="{StaticResource TextGeneral}"  HorizontalAlignment="Center" FontStretch="UltraExpanded" />
+            <Label Content="P A P E R S" FontSize="40" FontWeight="Bold" Style="{StaticResource TextGeneral}" HorizontalAlignment="Center" />
+        </StackPanel>
 
         <Button Content="Exit" Margin="10,10" Width="150" Height="50"
                 FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Cursor="Hand"
                 Grid.Column="1" Grid.Row="3"
                 x:Name="ExitButton" Click="ExitButton_Click"
-                Style="{StaticResource btnBlue}" />
+                Style="{StaticResource btnGeneral}" />
 
         <Button Content="Papers" Margin="10,10" Width="150" Height="50"
                 FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                 Cursor="Hand"
                 Grid.Column="2" Grid.Row="3"
                 x:Name="Papers" Click="Papers_Click"
-                Style="{StaticResource btnBlue}" />
+                Style="{StaticResource btnGeneral}" />
 
 
     </Grid>

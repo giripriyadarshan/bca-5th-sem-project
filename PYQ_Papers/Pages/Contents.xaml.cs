@@ -118,13 +118,7 @@ namespace PYQ_Papers.Pages
             // if no item is selected, then it used to open the _fileStorage directory
             if (FileList.SelectedItem == null) return;
             var x = FileList.SelectedItem as ListOfFiles;
-            //
-            /* TODO:
-             * opening a file increment a value to show number of times it was accessed
-             * reports to be generated in the admin view only
-             * increments cant be reset, disabled or decreased
-             */
-            //
+        
             if (connection.State == ConnectionState.Closed)
             {
                 connection.Open();
@@ -190,13 +184,3 @@ namespace PYQ_Papers.Pages
         public string YearID { get; set; }
     }
 }
-
-
-/*
- Generate reports on 
-    on how many times a paper was viewed
-    how much hour a paper was viewed
-    most viewed paper
-    most number of watch hours
-user based too for the above
-*/
