@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Previous Years Question Papers" 
-        Height="450" Width="800" MinHeight="300" MinWidth="400"
-        Loaded="Window_Loaded" Closing="Window_Closing" 
-        Icon="staticresources/icons/ico.png"
-        Background="{DynamicResource MainBackground}"
+        Height="600" Width="1000" MinHeight="300" MinWidth="400"
+        Loaded="Window_Loaded" Closing="Window_Closing"
+        Background="Transparent"
+        Icon="staticresources/icons/logo.png"
         >
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="198*"/>
-            <ColumnDefinition Width="37*"/>
-            <ColumnDefinition Width="161*"/>
-            <ColumnDefinition Width="198*"/>
-            <ColumnDefinition Width="198*"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="45" />
@@ -27,7 +27,8 @@
             <RowDefinition Height="84*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center">
+        <Image Source="/StaticResources/icons/logo.png" Height="45" MouseLeftButtonUp="Home_Click" Cursor="Hand" />
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel.Background>
                 <ImageBrush ImageSource="staticresources/images/sub-bg-2.jpg" Opacity=".1" Stretch="Uniform">
                 </ImageBrush>

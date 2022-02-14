@@ -31,17 +31,16 @@
 
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type local:MenuItem}" ItemsSource="{Binding Items}">
-                        <TextBlock Text="{Binding Title}" />
+                        <TextBlock Text="{Binding Title}" Style="{StaticResource TextBlockStyle}" />
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
-
             </TreeView>
         </DockPanel>
 
         <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick"
                  HorizontalContentAlignment="Center" Background="Transparent"
                  Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource TransparentStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:ListOfFiles}">
                     <StackPanel Orientation="Vertical" Margin="20">
@@ -74,10 +73,10 @@
                     <Image Source="LocalResources\search_icon.png" Stretch="Fill" />
                 </Button>
 
-                <TextBox x:Name="SearchBox" Background="Transparent"
+                <TextBox x:Name="SearchBox"
                          Padding="3 0 0 0" BorderThickness="0" FontSize="20"
                          VerticalContentAlignment="Center"
-                         KeyDown="SearchBox_KeyDown" />
+                         KeyDown="SearchBox_KeyDown" Style="{StaticResource TransparentStyle}"/>
             </DockPanel>
         </Border>
 

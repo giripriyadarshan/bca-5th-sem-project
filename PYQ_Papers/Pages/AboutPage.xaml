@@ -13,11 +13,15 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="About this Application" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="45" FontWeight="Bold" Margin="10,10"/>
+        <Label Grid.Row="0" Content="About this Application" 
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+               FontSize="45" FontWeight="Bold" Margin="10,10"
+               Style="{StaticResource TextGeneral}"
+               />
 
         <ScrollViewer Grid.Row="1">
         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,10" FontSize="20" TextWrapping="Wrap"
-                   ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                   ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Style="{StaticResource TextBlockStyle}">
             This application is part of 5th Semester Final Year Mini-Project
             <LineBreak/>
             

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 
 namespace PYQ_Papers.Pages
 {
@@ -24,12 +25,12 @@ namespace PYQ_Papers.Pages
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            Application.Current.Resources["MainBackground"] = Application.Current.Resources["SecondaryBackground"];
+            Application.Current.MainWindow.Background = (Brush)Application.Current.Resources["SecondaryBackground"];
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Application.Current.Resources["SecondaryBackground"] = Application.Current.Resources["MainBackground"];
+            Application.Current.MainWindow.Background = (Brush)Application.Current.Resources["MainBackground"];
         }
     }
 }

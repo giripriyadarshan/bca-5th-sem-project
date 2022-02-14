@@ -21,16 +21,16 @@
 
         <DockPanel Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"
                    Height="46" Margin="208,0,0,0" Width="384">
-            <TextBlock Text="Successfully Uploaded" FontSize="35" FontWeight="ExtraBold" />
+            <TextBlock Text="Successfully Uploaded" FontSize="35" FontWeight="ExtraBold" Style="{StaticResource TextBlockStyle}"/>
         </DockPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="320">
             <Button x:Name="contents" Height="50" Width="140" Margin="10,0" Click="contents_Click"
-                    Style="{StaticResource btnBlue}">
+                    Style="{StaticResource btnGeneral}">
                 Go Back to contents
             </Button>
             <Button x:Name="uploadagain" Height="50" Width="140" Margin="10,0" Click="uploadagain_Click"
-                    Style="{StaticResource btnBlue}">
+                    Style="{StaticResource btnGeneral}">
                 Upload More
             </Button>
         </StackPanel>

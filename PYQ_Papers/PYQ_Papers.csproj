@@ -253,9 +253,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ico.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Pages\LocalResources\search_icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -269,6 +266,9 @@
     <Resource Include="StaticResources\images\main-bg.jpg" />
     <Resource Include="StaticResources\images\sub-bg-1.jpg" />
     <Resource Include="StaticResources\images\sub-bg-2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="StaticResources\icons\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,7 +10,17 @@
             <Setter Property="FontFamily" Value="Calibri"></Setter>
         </Style>
 
-        <Style TargetType="Button" x:Key="btnBlue">
+        <Style TargetType="{x:Type Control}" x:Key="TransparentStyle" BasedOn="{StaticResource TextGeneral}">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+            <Setter Property="Foreground" Value="#f8f8f2"></Setter>
+            <Setter Property="FontFamily" Value="Calibri"></Setter>
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style TargetType="Button" x:Key="btnGeneral">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="#F8F8F2" />
             <Setter Property="FontSize" Value="15" />
@@ -34,7 +44,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" >
                         <Setter.Value>
-                            <ImageBrush ImageSource="staticresources/images/sub-bg-1.jpg" Opacity=".6"/>
+                            <ImageBrush ImageSource="staticresources/images/sub-bg-2.jpg" Opacity=".6"/>
                         </Setter.Value>
                     </Setter>
                     <Setter Property="Foreground" Value="#f8f8f2" />
@@ -43,21 +53,21 @@
         </Style>
 
 
-        <Style TargetType="Label" x:Key="btnTopBar">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="#f8f8f2" />
+        <Style TargetType="Label" x:Key="btnTopBar" BasedOn="{StaticResource TransparentStyle}">
             <Setter Property="Width" Value="100" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Margin" Value="10 0" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
         </Style>
 
         <Style TargetType="TreeViewItem" x:Key="TreeItemStyle"  BasedOn="{StaticResource TextGeneral}">
         </Style>
 
         <ImageBrush x:Key="MainBackground" ImageSource="staticresources/images/main-bg.jpg" />
-        <ImageBrush x:Key="SecondaryBackground" ImageSource="staticresources/images/sub-bg-1.jpg" />
+        <ImageBrush x:Key="SecondaryBackground" ImageSource="staticresources/images/sub-bg-2.jpg" />
 
     </Application.Resources>
 </Application>

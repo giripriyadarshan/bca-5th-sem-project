@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:PYQ_Papers.Pages"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PostLoginMenuPage">
@@ -25,32 +24,32 @@
 
             <TextBlock Text="Admin Login" FontSize="43" FontWeight="DemiBold"
                        Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
-                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TextBlockStyle}" />
 
             <Button x:Name="DeletePapers" Content="Delete Papers"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
                     Grid.Column="1" Grid.Row="2" Click="DeletePapers_Click"
-                    Style="{StaticResource btnBlue}" />
+                    Style="{StaticResource btnGeneral}" />
 
             <Button x:Name="AddPapers" Content="Add Papers"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
                     Grid.Column="1" Grid.Row="4" Click="AddPapers_Click"
-                    Style="{StaticResource btnBlue}" />
+                    Style="{StaticResource btnGeneral}" />
 
             <Button x:Name="AdminSettings" Content="Admin Settings"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
                     Grid.Column="0" Grid.Row="2" Click="AdminSettings_Click"
-                    Style="{StaticResource btnBlue}" />
+                    Style="{StaticResource btnGeneral}" />
             
             <Button x:Name="ContentDetails" Content="Content Details"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
                     Grid.Column="1" Grid.Row="3" Click="ContentDetails_Click"
-                    Style="{StaticResource btnBlue}" />
+                    Style="{StaticResource btnGeneral}" />
 
             <Button x:Name="GoBack" Content="Go back (Logout)"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="50,10"
                     Grid.Column="0" Grid.Row="4" Click="GoBack_Click"
-                    Style="{StaticResource btnBlue}" />
+                    Style="{StaticResource btnGeneral}" />
 
 
         </Grid>
