@@ -33,20 +33,9 @@
                 <ImageBrush ImageSource="staticresources/images/sub-bg-2.jpg" Opacity=".1" Stretch="Uniform">
                 </ImageBrush>
             </StackPanel.Background>
-            <!--
-            <Menu DockPanel.Dock="Top" Background="Transparent" Style="{StaticResource TextGeneral}"
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
-                  Cursor="Hand"
-                  >
-                <MenuItem Header="Home" Click="Home_Click"/>
-                <MenuItem Header="Login" Click="Login_Click" />
-                <MenuItem Header="About" Click="About_Click" />
-            </Menu> 
-            -->
             <Label Content="Home" MouseLeftButtonUp="Home_Click" Style="{StaticResource btnTopBar}" />
             <Label Content="Login" MouseLeftButtonUp="Login_Click" Style="{StaticResource btnTopBar}" />
-            <Label Content="Contents" MouseLeftButtonUp="Content_Click" Style="{StaticResource btnTopBar}" />
+            <Label Content="Papers" MouseLeftButtonUp="Content_Click" Style="{StaticResource btnTopBar}" />
             <Label Content="About" MouseLeftButtonUp="About_Click" Style="{StaticResource btnTopBar}" />
         </StackPanel>
 

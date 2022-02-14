@@ -259,10 +259,6 @@
     <Resource Include="Pages\LocalResources\adobepdfimage.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="StaticResources\icons\ico.png" />
-    <Resource Include="StaticResources\icons\menu-512.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="StaticResources\images\main-bg.jpg" />
     <Resource Include="StaticResources\images\sub-bg-1.jpg" />
     <Resource Include="StaticResources\images\sub-bg-2.jpg" />
