@@ -4,9 +4,16 @@
              xmlns:local="clr-namespace:PYQ_Papers"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+
+
+        <Style TargetType="{x:Type Control}" x:Key="TextGeneral">
+            <Setter Property="Foreground" Value="#f8f8f2"></Setter>
+            <Setter Property="FontFamily" Value="Calibri"></Setter>
+        </Style>
+
         <Style TargetType="Button" x:Key="btnBlue">
-            <Setter Property="Background" Value="#fff" />
-            <Setter Property="Foreground" Value="#000" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#F8F8F2" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="Margin" Value="5" />
             <Setter Property="Template">
@@ -31,5 +38,13 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+
+        <Style TargetType="TreeViewItem" x:Key="TreeItemStyle"  BasedOn="{StaticResource TextGeneral}">
+        </Style>
+
+        <ImageBrush x:Key="MainBackground" ImageSource="staticresources/images/main-bg.jpg" />
+        <ImageBrush x:Key="SecondaryBackground" ImageSource="staticresources/images/sub-bg-1.jpg" />
+
     </Application.Resources>
 </Application>

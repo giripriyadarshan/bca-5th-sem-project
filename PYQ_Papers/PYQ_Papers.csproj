@@ -141,6 +141,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ContentDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Contents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -181,6 +185,9 @@
     </Compile>
     <Compile Include="Pages\ChangeAdminAuth.xaml.cs">
       <DependentUpon>ChangeAdminAuth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ContentDetails.xaml.cs">
+      <DependentUpon>ContentDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Contents.xaml.cs">
       <DependentUpon>Contents.xaml</DependentUpon>
@@ -253,6 +260,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pages\LocalResources\adobepdfimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="StaticResources\icons\ico.png" />
+    <Resource Include="StaticResources\icons\menu-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="StaticResources\images\main-bg.jpg" />
+    <Resource Include="StaticResources\images\sub-bg-1.jpg" />
+    <Resource Include="StaticResources\images\sub-bg-2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

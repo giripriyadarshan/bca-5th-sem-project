@@ -6,7 +6,10 @@
         mc:Ignorable="d"
         Title="Previous Years Question Papers" 
         Height="450" Width="800" MinHeight="300" MinWidth="400"
-        Loaded="Window_Loaded" Closing="Window_Closing" Icon="ico.png">
+        Loaded="Window_Loaded" Closing="Window_Closing" 
+        Icon="staticresources/icons/ico.png"
+        Background="{DynamicResource MainBackground}"
+        >
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,26 +20,35 @@
             <ColumnDefinition Width="198*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="23"/>
+            <RowDefinition Height="45" />
             <RowDefinition Height="145*"/>
             <RowDefinition Height="83*"/>
             <RowDefinition Height="84*"/>
             <RowDefinition Height="84*"/>
         </Grid.RowDefinitions>
-        <DockPanel Background="Gray" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" >
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="Page">
-                    <MenuItem Header="Home" Click="MenuItem_Click" />
-                    <MenuItem Header="Login" Click="MenuItem_Click_1" />
-                    <MenuItem Header="About" Click="MenuItem_OnClick" />
-                    <Separator />
-                    <MenuItem Header="Exit" Click="MenuItem_Click_2" />
-                </MenuItem>
+
+        <!-- TODO: Refactor MenuItem click function names to more sensible ones -->
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+            <DockPanel.Background>
+                <ImageBrush ImageSource="staticresources/images/sub-bg-2.jpg" Opacity=".3">
+                </ImageBrush>
+            </DockPanel.Background>
+            <Menu DockPanel.Dock="Top" Background="Transparent" Style="{StaticResource TextGeneral}"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Cursor="Hand"
+                  >
+                <MenuItem Header="Home" Click="MenuItem_Click"/>
+                <MenuItem Header="Login" Click="MenuItem_Click_1" />
+                <MenuItem Header="About" Click="MenuItem_OnClick" />
             </Menu>
         </DockPanel>
 
-        <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="4" x:Name="MainFrame" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" />
-        
+        <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="4" x:Name="MainFrame" 
+               NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" 
+               >
+        </Frame>
+
     </Grid>
 
     <Window.Resources>

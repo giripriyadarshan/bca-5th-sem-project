@@ -27,7 +27,7 @@
 
 
             <TreeView x:Name="MainList" DockPanel.Dock="Top" SelectedItemChanged="MainList_SelectedItemChanged"
-                      Background="Transparent" FontSize="22">
+                      Background="Transparent" FontSize="22" ItemContainerStyle="{StaticResource TreeItemStyle}">
 
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type local:MenuItem}" ItemsSource="{Binding Items}">
@@ -70,11 +70,11 @@
                 Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
 
             <DockPanel Margin="5">
-                <Button Width="35" x:Name="SearchButton" Click="SearchButton_Click" Cursor="Hand">
+                <Button Width="35" x:Name="SearchButton" Click="SearchButton_Click" Cursor="Hand" Background="Transparent">
                     <Image Source="LocalResources\search_icon.png" Stretch="Fill" />
                 </Button>
 
-                <TextBox x:Name="SearchBox"
+                <TextBox x:Name="SearchBox" Background="Transparent"
                          Padding="3 0 0 0" BorderThickness="0" FontSize="20"
                          VerticalContentAlignment="Center"
                          KeyDown="SearchBox_KeyDown" />

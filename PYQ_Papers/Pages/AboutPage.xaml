@@ -18,17 +18,23 @@
         <ScrollViewer Grid.Row="1">
         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,10" FontSize="20" TextWrapping="Wrap"
                    ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
-            This application is part of 4th Semester Value Added Program Project
+            This application is part of 5th Semester Final Year Mini-Project
             <LineBreak/>
+            
+            PYQ Papers application is designed to reduce the use of paper and 
+            make sure access to the sacred texts of university exams are available to everyone.
+            <LineBreak/>
+            
             As a student, you can access all previous year question and answer papers directly from 
+            <Hyperlink NavigateUri="Contents.xaml">Contents</Hyperlink>. Also you can search for a particular question within the papers and get all the related papers directly.
             <LineBreak/>
-            <Hyperlink NavigateUri="Contents.xaml">Contents</Hyperlink>
-            <LineBreak/>
-            Admins can upload the papers using proper credentials in <Hyperlink NavigateUri="LoginPage.xaml">Login</Hyperlink>
-            <LineBreak/>
+            
+            Admins can modify the papers and admin settings after logging into admin account using proper credentials in <Hyperlink NavigateUri="LoginPage.xaml" >Login</Hyperlink>
             <LineBreak/>
             <LineBreak/>
-            Members of this project are: <LineBreak/>
+            <LineBreak/>
+            
+            This application is brought to you by <LineBreak/>
             Vetrivel Selvam (R1911712) <LineBreak/>
             Safiya G Tataria (R1911682) <LineBreak/>
             Priyadarshan Giri (R1911676) <LineBreak/>
