@@ -27,22 +27,27 @@
             <RowDefinition Height="84*"/>
         </Grid.RowDefinitions>
 
-        <!-- TODO: Refactor MenuItem click function names to more sensible ones -->
-        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
-            <DockPanel.Background>
-                <ImageBrush ImageSource="staticresources/images/sub-bg-2.jpg" Opacity=".3">
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel.Background>
+                <ImageBrush ImageSource="staticresources/images/sub-bg-2.jpg" Opacity=".1" Stretch="Uniform">
                 </ImageBrush>
-            </DockPanel.Background>
+            </StackPanel.Background>
+            <!--
             <Menu DockPanel.Dock="Top" Background="Transparent" Style="{StaticResource TextGeneral}"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   Cursor="Hand"
                   >
-                <MenuItem Header="Home" Click="MenuItem_Click"/>
-                <MenuItem Header="Login" Click="MenuItem_Click_1" />
-                <MenuItem Header="About" Click="MenuItem_OnClick" />
-            </Menu>
-        </DockPanel>
+                <MenuItem Header="Home" Click="Home_Click"/>
+                <MenuItem Header="Login" Click="Login_Click" />
+                <MenuItem Header="About" Click="About_Click" />
+            </Menu> 
+            -->
+            <Label Content="Home" MouseLeftButtonUp="Home_Click" Style="{StaticResource btnTopBar}" />
+            <Label Content="Login" MouseLeftButtonUp="Login_Click" Style="{StaticResource btnTopBar}" />
+            <Label Content="Contents" MouseLeftButtonUp="Content_Click" Style="{StaticResource btnTopBar}" />
+            <Label Content="About" MouseLeftButtonUp="About_Click" Style="{StaticResource btnTopBar}" />
+        </StackPanel>
 
         <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="4" x:Name="MainFrame" 
                NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" 

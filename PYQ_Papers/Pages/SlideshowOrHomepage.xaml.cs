@@ -26,5 +26,10 @@ namespace PYQ_Papers.Pages
         {
             Application.Current.Resources["MainBackground"] = Application.Current.Resources["SecondaryBackground"];
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Resources["SecondaryBackground"] = Application.Current.Resources["MainBackground"];
+        }
     }
 }

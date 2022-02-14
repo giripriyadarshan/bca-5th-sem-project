@@ -38,8 +38,6 @@
             <Button x:Name="LoginButton" Content="Login" Canvas.Top="209" FontSize="35" Width="327" FontWeight="Bold"
                     Click="Login_button_OnClick"
                     Style="{StaticResource btnBlue}" Canvas.Left="5" />
-
-
         </Canvas>
     </Grid>
 </Page>
