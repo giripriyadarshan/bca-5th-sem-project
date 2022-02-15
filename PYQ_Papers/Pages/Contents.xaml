@@ -38,7 +38,7 @@
         </DockPanel>
 
         <ListBox x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick"
-                 HorizontalContentAlignment="Center" Background="Transparent"
+                 HorizontalContentAlignment="Center"
                  Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="3"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource TransparentStyle}">
             <ListBox.ItemTemplate>
