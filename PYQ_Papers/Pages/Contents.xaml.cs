@@ -182,5 +182,6 @@ namespace PYQ_Papers.Pages
     {
         public string PathOfFile { get; set; }
         public string YearID { get; set; }
+        public string OpenedCount { get; set; }
     }
 }

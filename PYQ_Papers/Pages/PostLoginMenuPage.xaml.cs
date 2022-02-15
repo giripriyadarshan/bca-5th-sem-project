@@ -39,7 +39,7 @@ namespace PYQ_Papers.Pages
 
         private void ContentDetails_Click(object sender, RoutedEventArgs e)
         {
-
+            _ = NavigationService?.Navigate(new ContentDetails());
         }
     }
 }
