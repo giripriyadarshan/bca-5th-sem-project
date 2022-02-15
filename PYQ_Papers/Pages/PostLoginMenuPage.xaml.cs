@@ -36,5 +36,10 @@ namespace PYQ_Papers.Pages
         {
             _ = NavigationService?.Navigate(new AdminProfileSettings());
         }
+
+        private void ContentDetails_Click(object sender, RoutedEventArgs e)
+        {
+            _ = NavigationService?.Navigate(new ContentDetails());
+        }
     }
 }

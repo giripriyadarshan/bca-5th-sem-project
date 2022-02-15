@@ -135,6 +135,8 @@ namespace PYQ_Papers.Pages
                         "File already exists", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     File.Delete(Set_File_Storage_String(yearID) + _filename);
+                    Set_Command("UPDATE files SET no_of_times_opened='0'");
+                    _ = command.ExecuteNonQuery();
                 }
                 else
                 {
@@ -143,7 +145,7 @@ namespace PYQ_Papers.Pages
             }
             else
             {
-                Set_Command("INSERT INTO files(file_name, yearID) VALUES(@file_name, @yearID)");
+                Set_Command("INSERT INTO files(file_name, yearID, no_of_times_opened) VALUES(@file_name, @yearID, '0')");
                 command.Parameters.Clear();
                 _ = command.Parameters.AddWithValue("@file_name", _filename);
                 _ = command.Parameters.AddWithValue("@yearID", yearID);

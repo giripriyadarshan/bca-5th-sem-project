@@ -23,7 +23,7 @@
 
             <Label Content="Settings" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                   FontSize="50" />
+                   FontSize="50" Style="{StaticResource TextGeneral}" />
 
             <Button x:Name="Change" Content="Change Username/Password"
                     Click="Change_Click"
@@ -32,27 +32,27 @@
                     FontSize="20"
                     Margin="0,0,50,0"
                     HorizontalAlignment="Right"
-                    Style="{StaticResource btnBlue}" />
+                    Style="{StaticResource btnGeneral}" />
             <Button x:Name="AddUser" Content="Add Admin"
                     Click="AddUser_Click"
                     Grid.Column="1" Grid.Row="1"
                     Height="60" Width="300"
                     FontSize="20"
                     Margin="50,0,0,0" HorizontalAlignment="Left"
-                    Style="{StaticResource btnBlue}" />
+                    Style="{StaticResource btnGeneral}" />
             <Button x:Name="DeleteCurrentAdmin" Content="Delete Current Admin"
                     Click="DeleteCurrentAdmin_Click"
                     Grid.Column="1" Grid.Row="2"
                     Height="60" Width="300"
                     FontSize="20"
                     Margin="50,0,0,0" HorizontalAlignment="Left"
-                    Style="{StaticResource btnBlue}" />
+                    Style="{StaticResource btnGeneral}" />
             <Button x:Name="GoBack" Content="&lt;-- GoBack --"
                     Click="GoBack_Click"
                     Grid.Column="0" Grid.Row="3"
                     Height="60" Width="300"
                     FontSize="20"
-                    Style="{StaticResource btnBlue}" />
+                    Style="{StaticResource btnGeneral}" />
 
 
         </Grid>
