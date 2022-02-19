@@ -86,6 +86,7 @@ namespace PYQ_Papers.Pages
 
             if (selectedItem.YearID == null) return;
 
+            list.Clear();
             FileList.ItemsSource = null;
             FileList.Items.Clear();
             var files = new DataTable();
@@ -100,12 +101,14 @@ namespace PYQ_Papers.Pages
 
             foreach (DataRow dtrow in files.Rows)
             {
-                _ = FileList.Items.Add(new ListOfFiles()
+                list.Add(new ListOfFiles()
                 {
                     PathOfFile = dtrow["file_name"].ToString(),
                     YearID = dtrow["yearID"].ToString(),
                 });
             }
+
+            FileList.ItemsSource = list;
 
             if (connection.State == ConnectionState.Open)
             {
