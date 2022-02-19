@@ -33,7 +33,9 @@
             <TextBox x:Name="UsernameInput" Width="146" FontSize="24" Canvas.Left="158" Canvas.Top="8" Style="{StaticResource TransparentStyle}"/>
 
             <Label Content="Password: " FontSize="24" Canvas.Top="76" Style="{StaticResource TextGeneral}" />
-            <PasswordBox x:Name="PasswordInput" FontSize="24" Width="146" Canvas.Left="158" Canvas.Top="84" Style="{StaticResource TransparentStyle}" />
+            <PasswordBox x:Name="PasswordInput" FontSize="24" Width="146" Canvas.Left="158" Canvas.Top="84" Style="{StaticResource TransparentStyle}" 
+                         KeyDown="PasswordInput_KeyDown"
+                         />
 
             <Button x:Name="LoginButton" Content="Login" Canvas.Top="209" FontSize="35" Width="327" FontWeight="Bold"
                     Click="Login_button_OnClick"
