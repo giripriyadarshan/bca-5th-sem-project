@@ -6,6 +6,7 @@ using static PYQ_Papers.commons;
 using static PYQ_Papers.Session;
 using System.Windows.Media.Animation;
 using System.Data;
+using System.Linq;
 
 namespace PYQ_Papers.Pages
 {
@@ -183,7 +184,7 @@ namespace PYQ_Papers.Pages
             var animation = parent?.Resources["TextBoxAnimation"] as Storyboard;
             var isInputValid = true;
 
-            if (string.IsNullOrWhiteSpace(SemesterInput.Text))
+            if (!SemesterInput.Text.All(char.IsDigit))
             {
                 isInputValid = false;
                 animation?.Begin(SemesterInput);
@@ -195,7 +196,7 @@ namespace PYQ_Papers.Pages
                 animation?.Begin(SubjectInput);
             }
 
-            if (string.IsNullOrWhiteSpace(YearInput.Text))
+            if (!YearInput.Text.All(char.IsDigit) || YearInput.Text.Length != 4)
             {
                 isInputValid = false;
                 animation?.Begin(YearInput);
