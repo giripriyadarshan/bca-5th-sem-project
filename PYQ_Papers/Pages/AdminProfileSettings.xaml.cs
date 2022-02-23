@@ -1,8 +1,8 @@
-﻿using System.Data;
+﻿using PYQ_Papers.Models;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using static PYQ_Papers.Session;
-using static PYQ_Papers.commons;
 
 namespace PYQ_Papers.Pages
 {
@@ -28,19 +28,11 @@ namespace PYQ_Papers.Pages
 
         private void DeleteCurrentAdmin_Click(object sender, RoutedEventArgs e)
         {
-            if (connection.State == ConnectionState.Closed)
+            var context = new Context();
+            if (context.Admins.Count() > 1)
             {
-                connection.Open();
-            }
-
-            var dt = new DataTable();
-            Set_Command("SELECT * FROM admin");
-            _ = da.Fill(dt);
-
-            if (dt.Rows.Count > 1)
-            {
-                Set_Command("DELETE FROM admin WHERE ID='" + adminId + "'");
-                _ = command.ExecuteNonQuery();
+                context.Admins.Remove(context.Admins.Where(a => a.Id == adminId).Single());
+                context.SaveChanges();
 
                 adminId = -1;
                 adminName = null;
@@ -49,16 +41,12 @@ namespace PYQ_Papers.Pages
                 _ = MessageBox.Show("Successfully deleted admin");
 
                 _ = NavigationService?.Navigate(new LoginPage());
+
             }
             else
             {
                 _ = MessageBox.Show(
                     "There exists only 1 admin account. Application must contain at least 1 admin. Please try updating credentials for better security.");
-            }
-
-            if (connection.State == ConnectionState.Open)
-            {
-                connection.Close();
             }
         }
 

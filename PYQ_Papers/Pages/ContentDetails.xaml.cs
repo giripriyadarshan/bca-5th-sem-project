@@ -1,18 +1,9 @@
-﻿using System;
+﻿using PYQ_Papers.Models;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static PYQ_Papers.commons;
 
 namespace PYQ_Papers.Pages
@@ -35,31 +26,27 @@ namespace PYQ_Papers.Pages
 
         private void Files(ref ListBox fileList, bool isAscending)
         {
-            if (connection.State == ConnectionState.Closed)
-            {
-                connection.Open();
-            }
-
-            var files = new DataTable();
-            var commandString = "SELECT * FROM files ORDER BY no_of_times_opened " + (isAscending ? "ASC " : "DESC ");
-            Set_Command(commandString);
-            _ = da.Fill(files);
+            var context = new Context();
             fileList.Items.Clear();
 
-            foreach (DataRow dtrow in files.Rows)
+            var files = new List<File>();
+
+
+            if (isAscending)
+                files = context.Files.OrderBy(f => f.NumberOfTimesOpened).Take(10).ToList();
+            else
+                files = context.Files.OrderByDescending(f => f.NumberOfTimesOpened).Take(10).ToList();
+
+            foreach (var file in files)
             {
                 fileList.Items.Add(new ListOfFiles()
                 {
-                    PathOfFile = dtrow["file_name"].ToString(),
-                    YearID = dtrow["yearID"].ToString(),
-                    OpenedCount = dtrow["no_of_times_opened"].ToString(),
+                    PathOfFile = file.FileName,
+                    OpenedCount = file.NumberOfTimesOpened,
+                    YearID = file.Year.Id
                 });
             }
 
-            if (connection.State == ConnectionState.Open)
-            {
-                connection.Close();
-            }
         }
 
         private void Descending_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -68,7 +55,7 @@ namespace PYQ_Papers.Pages
 
             var x = Descending.SelectedItem as ListOfFiles;
 
-            _ = System.Diagnostics.Process.Start(Set_File_Storage_String(int.Parse(x.YearID)) + x.PathOfFile);
+            _ = System.Diagnostics.Process.Start(Set_File_Storage_String(x.YearID) + x.PathOfFile);
         }
 
         private void Ascending_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -77,7 +64,7 @@ namespace PYQ_Papers.Pages
 
             var x = Ascending.SelectedItem as ListOfFiles;
 
-            _ = System.Diagnostics.Process.Start(Set_File_Storage_String(int.Parse(x.YearID)) + x.PathOfFile);
+            _ = System.Diagnostics.Process.Start(Set_File_Storage_String(x.YearID) + x.PathOfFile);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

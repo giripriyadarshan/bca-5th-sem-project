@@ -1,6 +1,7 @@
 ﻿using PYQ_Papers.Models;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls.Primitives;
@@ -69,7 +70,7 @@ namespace PYQ_Papers.Pages
 
             var context = new Context();
 
-            foreach (var file in context.Files.Where(f => f.Year.Id == selectedItem.YearID).ToList())
+            foreach (var file in context.Files.Where(f => f.Year.Id == selectedItem.YearID).Include(f => f.Year).ToList())
             {
                 list.Add(new ListOfFiles()
                 {
@@ -88,7 +89,10 @@ namespace PYQ_Papers.Pages
             var x = FileList.SelectedItem as ListOfFiles;
 
             var context = new Context();
-            var file = context.Files.Where(f => f.Year.Id == x.YearID).Where(f => f.FileName == x.PathOfFile).Single();
+            var file = context.Files.Where(f => f.FileName == x.PathOfFile)
+                .Include(f => f.Year)
+                .Where(f => f.Year.Id == x.YearID)
+                .Single();
             file.NumberOfTimesOpened++;
             context.SaveChanges();
 
@@ -143,6 +147,6 @@ namespace PYQ_Papers.Pages
     {
         public string PathOfFile { get; set; }
         public int YearID { get; set; }
-        public string OpenedCount { get; set; }
+        public int OpenedCount { get; set; }
     }
 }

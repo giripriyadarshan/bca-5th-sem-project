@@ -1,8 +1,7 @@
-﻿using System.Data;
+﻿using PYQ_Papers.Models;
 using System.Windows;
 using System.Windows.Controls;
 using static PYQ_Papers.Session;
-using static PYQ_Papers.commons;
 
 namespace PYQ_Papers.Pages
 {
@@ -25,23 +24,16 @@ namespace PYQ_Papers.Pages
         {
             if (!string.IsNullOrEmpty(adminUsername.Text) && !string.IsNullOrEmpty(adminPassword.Text))
             {
-                if (connection.State == ConnectionState.Closed)
-                {
-                    connection.Open();
-                }
-
-                Set_Command("UPDATE admin SET username='" + adminUsername.Text.Trim() + "', password='" +
-                            adminPassword.Text.Trim() + "' WHERE ID='" + adminId + "'");
-                _ = command.ExecuteNonQuery();
-
-                if (connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                }
+                var context = new Context();
+                var admin = context.Admins.Find(adminId);
+                admin.Username = adminUsername.Text.Trim();
+                admin.Password = adminPassword.Text;
+                context.SaveChanges();
 
                 adminName = adminUsername.Text;
                 _ = MessageBox.Show("Updated");
                 _ = NavigationService?.Navigate(new AdminProfileSettings());
+
             }
             else
             {
