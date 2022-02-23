@@ -1,12 +1,12 @@
-﻿using System.Windows;
+﻿using Microsoft.Win32;
+using System.Data;
 using System.IO;
-using Microsoft.Win32;
-using Path = System.IO.Path;
+using System.Linq;
+using System.Windows;
+using System.Windows.Media.Animation;
 using static PYQ_Papers.commons;
 using static PYQ_Papers.Session;
-using System.Windows.Media.Animation;
-using System.Data;
-using System.Linq;
+using Path = System.IO.Path;
 
 namespace PYQ_Papers.Pages
 {
@@ -196,7 +196,7 @@ namespace PYQ_Papers.Pages
                 animation?.Begin(SubjectInput);
             }
 
-            if (!YearInput.Text.All(char.IsDigit) || YearInput.Text.Length != 4)
+            if (!YearInput.Text.All(char.IsDigit) || YearInput.Text.Trim().Length != 4)
             {
                 isInputValid = false;
                 animation?.Begin(YearInput);
