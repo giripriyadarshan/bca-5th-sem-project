@@ -1,7 +1,6 @@
-﻿using System.Data;
+﻿using PYQ_Papers.Models;
 using System.Windows;
 using System.Windows.Controls;
-using static PYQ_Papers.commons;
 using static PYQ_Papers.Session;
 
 namespace PYQ_Papers.Pages
@@ -25,19 +24,10 @@ namespace PYQ_Papers.Pages
         {
             if (!string.IsNullOrEmpty(adminUsername.Text) && !string.IsNullOrEmpty(adminPassword.Text))
             {
-                if (connection.State == ConnectionState.Closed)
-                {
-                    connection.Open();
-                }
-
-                Set_Command("INSERT INTO admin (username, password) VALUES('" + adminUsername.Text.Trim() + "' , '" +
-                            adminPassword.Text + "')");
-                _ = command.ExecuteNonQuery();
-
-                if (connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                }
+                var context = new Context();
+                var newAdmin = new Admin() { Username = adminUsername.Text.Trim(), Password = adminPassword.Text };
+                context.Admins.Add(newAdmin);
+                context.SaveChanges();
 
                 _ = MessageBox.Show("Inserted " + adminUsername.Text.Trim());
                 _ = NavigationService?.Navigate(new AdminProfileSettings());

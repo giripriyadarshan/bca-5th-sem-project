@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using PYQ_Papers.Models;
+using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using static PYQ_Papers.commons;
@@ -18,101 +20,64 @@ namespace PYQ_Papers.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (connection.State == ConnectionState.Closed)
+            var context = new Context();
+
+            var semester = new MenuItem() { Title = "Semester", YearID = -1 };
+
+            foreach (var sems in context.Semesters.OrderBy(sem => sem.Sem).ToList())
             {
-                connection.Open();
-            }
+                var subject = new MenuItem() { Title = sems.Sem.ToString(), YearID = -1 };
 
-            var sem = new MenuItem() { Title = "Semester" };
-
-            var dt = new DataTable();
-            Set_Command("SELECT * FROM semester ORDER BY sem ASC");
-            _ = da.Fill(dt);
-
-            foreach (DataRow dtrow in dt.Rows)
-            {
-                var sub = new MenuItem()
+                foreach (var subs in context.Subjects
+                    .Where(sub => sub.Semester.Sem == sems.Sem)
+                    .OrderBy(sub => sub.SubjectName)
+                    .ToList())
                 {
-                    Title = dtrow["sem"].ToString(),
-                };
+                    var year = new MenuItem() { Title = subs.SubjectName, YearID = -1 };
 
-                Set_Command("SELECT * FROM subject WHERE semesterID='" + dtrow["sem"] + "' ORDER BY subject_name ASC");
-                var s = new DataTable();
-                _ = da.Fill(s);
-
-                foreach (DataRow dtrow2 in s.Rows)
-                {
-                    var year = new MenuItem()
-                    {
-                        Title = dtrow2["subject_name"].ToString(),
-                    };
-
-                    Set_Command(
-                        "SELECT * FROM year WHERE " +
-                        "subjectID='" + dtrow2["ID"] + "' ORDER BY year_number ASC"
-                    );
-
-                    var y = new DataTable();
-                    _ = da.Fill(y);
-
-                    foreach (DataRow dtrow3 in y.Rows)
+                    foreach (var years in context.Years
+                        .Where(y => y.Subject.Id == subs.Id)
+                        .OrderBy(y => y.YearNumber)
+                        .ToList())
                     {
                         year.Items.Add(new MenuItem()
                         {
-                            Title = dtrow3["year_number"].ToString(),
-                            YearID = dtrow3["ID"].ToString()
+                            Title = years.YearNumber.ToString(),
+                            YearID = years.Id
                         });
                     }
 
-                    sub.Items.Add(year);
+                    subject.Items.Add(year);
                 }
-
-                sem.Items.Add(sub);
+                semester.Items.Add(subject);
             }
 
-            _ = MainList.Items.Add(sem);
+            _ = MainList.Items.Add(semester);
 
             Add_All_Files(ref FileList);
-
-            if (connection.State == ConnectionState.Open)
-            {
-                connection.Close();
-            }
         }
 
         private void MainList_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (!(e.NewValue is MenuItem selectedItem)) return;
 
-            if (selectedItem.YearID == null) return;
+            if (selectedItem.YearID < 1) return;
 
             list.Clear();
             FileList.ItemsSource = null;
             FileList.Items.Clear();
-            var files = new DataTable();
-            Set_Command("SELECT * FROM files WHERE yearID='" + selectedItem.YearID + "'");
 
-            if (connection.State == ConnectionState.Closed)
-            {
-                connection.Open();
-            }
+            var context = new Context();
 
-            _ = da.Fill(files);
-
-            foreach (DataRow dtrow in files.Rows)
+            foreach (var file in context.Files.Where(f => f.Year.Id == selectedItem.YearID).ToList())
             {
                 list.Add(new ListOfFiles()
                 {
-                    PathOfFile = dtrow["file_name"].ToString(),
-                    YearID = dtrow["yearID"].ToString(),
+                    PathOfFile = file.FileName,
+                    YearID = file.Year.Id,
                 });
-            }
 
-            FileList.ItemsSource = list;
-
-            if (connection.State == ConnectionState.Open)
-            {
-                connection.Close();
+                FileList.ItemsSource = list;
             }
         }
 
@@ -121,20 +86,13 @@ namespace PYQ_Papers.Pages
             // if no item is selected, then it used to open the _fileStorage directory
             if (FileList.SelectedItem == null) return;
             var x = FileList.SelectedItem as ListOfFiles;
-        
-            if (connection.State == ConnectionState.Closed)
-            {
-                connection.Open();
-            }
 
-            Set_Command("UPDATE files SET no_of_times_opened=no_of_times_opened+1 WHERE yearID='" + x.YearID + "' AND file_name='" + x.PathOfFile + "'");
-            _ = command.ExecuteNonQuery();
+            var context = new Context();
+            var file = context.Files.Where(f => f.Year.Id == x.YearID).Where(f => f.FileName == x.PathOfFile).Single();
+            file.NumberOfTimesOpened++;
+            context.SaveChanges();
 
-            if (connection.State == ConnectionState.Open)
-            {
-                connection.Close();
-            }
-            _ = System.Diagnostics.Process.Start(Set_File_Storage_String(int.Parse(x.YearID)) + x.PathOfFile);
+            _ = System.Diagnostics.Process.Start(Set_File_Storage_String(x.YearID) + x.PathOfFile);
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -145,7 +103,7 @@ namespace PYQ_Papers.Pages
             {
                 foreach (ListOfFiles i in list)
                 {
-                    string content = ReadFile(Set_File_Storage_String(int.Parse(i.YearID)) + i.PathOfFile);
+                    string content = ReadFile(Set_File_Storage_String(int.Parse(i.YearID.ToString())) + i.PathOfFile);
 
                     if (content.ToLower().Contains(SearchBox.Text.ToLower()))
                     {
@@ -178,13 +136,13 @@ namespace PYQ_Papers.Pages
         }
 
         public string Title { get; set; }
-        public string YearID { get; set; }
+        public int YearID { get; set; }
     }
 
     public class ListOfFiles
     {
         public string PathOfFile { get; set; }
-        public string YearID { get; set; }
+        public int YearID { get; set; }
         public string OpenedCount { get; set; }
     }
 }

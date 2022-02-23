@@ -1,12 +1,12 @@
-﻿using System.Windows;
-using System.IO;
-using Microsoft.Win32;
-using Path = System.IO.Path;
-using static PYQ_Papers.commons;
-using static PYQ_Papers.Session;
-using System.Windows.Media.Animation;
+﻿using Microsoft.Win32;
+using PYQ_Papers.Models;
 using System.Data;
 using System.Linq;
+using System.Windows;
+using System.Windows.Media.Animation;
+using static PYQ_Papers.commons;
+using static PYQ_Papers.Session;
+using Path = System.IO.Path;
 
 namespace PYQ_Papers.Pages
 {
@@ -46,25 +46,26 @@ namespace PYQ_Papers.Pages
         {
             if (!CheckForInvalidInput()) return;
 
-            if (connection.State == ConnectionState.Closed)
-            {
-                connection.Open();
-            }
+            var context = new Context();
+            var semester = new Semester();
+            var subject = new Subject();
+            var year = new Year();
+            var file = new File();
 
-            // validate semester input
-            if (int.TryParse(SemesterInput.Text.Trim(), out _))
-            {
-                var sem = new DataTable();
-                Set_Command("Select * FROM semester WHERE sem='" + SemesterInput.Text.Trim() + "'");
-                _ = da.Fill(sem);
+            //if (connection.State == ConnectionState.Closed)
+            //{
+            //    connection.Open();
+            //}
 
-                if (!(sem.Rows.Count > 0))
+            //// validate semester input
+            if (int.TryParse(SemesterInput.Text.Trim(), out int semInt))
+            {
+                if (!context.Semesters.Where(sem => sem.Sem.ToString() == SemesterInput.Text.Trim()).Any())
                 {
-                    Set_Command("INSERT INTO semester(sem) VALUES(@semester)");
-                    command.Parameters.Clear();
-                    _ = command.Parameters.AddWithValue("@semester", SemesterInput.Text.Trim());
-                    _ = command.ExecuteNonQuery();
+                    context.Semesters.Add(new Semester() { Sem = semInt });
+                    context.SaveChanges();
                 }
+                semester = context.Semesters.Find(semInt);
             }
             else
             {
@@ -74,92 +75,75 @@ namespace PYQ_Papers.Pages
             }
 
             // validate subject input
-            var sub = new DataTable();
-            int subjectID;
-            Set_Command("SELECT * FROM subject WHERE subject_name='" +
-                        SubjectInput.Text.Trim().ToLower() +
-                        "' AND semesterID='" + SemesterInput.Text.Trim() + "'");
-            _ = da.Fill(sub);
+            if (!context.Subjects
+                .Where(sub => sub.SubjectName == SubjectInput.Text.Trim().ToLower())
+                .Where(sub => sub.Semester == semester)
+                .Any())
+            {
+                context.Subjects.Add(new Subject()
+                {
+                    SubjectName = SubjectInput.Text.Trim().ToLower(),
+                    Semester = semester
+                });
+                context.SaveChanges();
+            }
 
-            if (sub.Rows.Count > 0)
-            {
-                subjectID = int.Parse(sub.Rows[0][0].ToString());
-            }
-            else
-            {
-                Set_Command(
-                    "INSERT INTO subject(subject_name, semesterID) OUTPUT INSERTED.ID VALUES(@subject_name, @semesterID)");
-                command.Parameters.Clear();
-                _ = command.Parameters.AddWithValue("@subject_name", SubjectInput.Text.Trim().ToLower());
-                _ = command.Parameters.AddWithValue("@semesterID", SemesterInput.Text.Trim());
-                subjectID = int.Parse(command.ExecuteScalar().ToString());
-            }
+            subject = context.Subjects.Where(s => s.SubjectName == SubjectInput.Text.Trim().ToLower()).Where(s => s.Semester == semester).Single();
 
             // validate year input
-            if (!int.TryParse(YearInput.Text.Trim(), out _))
+            if (int.TryParse(YearInput.Text.Trim(), out int yearInt))
+            {
+                if (!context.Years.Where(y => y.YearNumber == yearInt).Where(y => y.Subject == subject).Any())
+                {
+                    context.Years.Add(new Year()
+                    {
+                        YearNumber = yearInt,
+                        Subject = subject,
+                    });
+                    context.SaveChanges();
+                }
+
+                year = context.Years.Where(y => y.YearNumber == yearInt).Where(y => y.Subject == subject).Single();
+            }
+            else
             {
                 _ = MessageBox.Show("Please enter valid year number in arithmetic digits i.e 2021",
                     "INVALID YEAR INPUT");
                 return;
             }
 
-            var year = new DataTable();
-            int yearID;
-            Set_Command("SELECT * FROM year WHERE year_number='" + YearInput.Text.Trim() + "' AND subjectID='" +
-                        subjectID + "'");
-            _ = da.Fill(year);
+            // input for files table
+            _ = System.IO.Directory.CreateDirectory(Set_File_Storage_String(year.Id));
 
-            if (year.Rows.Count > 0)
+            file = context.Files.Where(f => f.FileName == _filename).Where(f => f.Year == year).Single();
+            if (file == null)
             {
-                yearID = int.Parse(year.Rows[0][0].ToString());
+                context.Files.Add(new File()
+                {
+                    FileName = _filename,
+                    Year = year,
+                    NumberOfTimesOpened = 0
+                });
+                context.SaveChanges();
+                file = context.Files.Where(f => f.FileName == _filename).Where(f => f.Year == year).Single();
             }
             else
-            {
-                Set_Command(
-                    "INSERT INTO year(year_number, subjectID) OUTPUT INSERTED.ID VALUES(@year_number, @subjectID)");
-                command.Parameters.Clear();
-                _ = command.Parameters.AddWithValue("@year_number", YearInput.Text.Trim());
-                _ = command.Parameters.AddWithValue("@subjectID", subjectID);
-                yearID = int.Parse(command.ExecuteScalar().ToString());
-            }
-
-            // input for files table
-            _ = Directory.CreateDirectory(Set_File_Storage_String(yearID));
-            var files = new DataTable();
-            Set_Command("SELECT * FROM files WHERE file_name='" + _filename + "' AND yearID='" + yearID + "'");
-            _ = da.Fill(files);
-
-            if (files.Rows.Count > 0)
             {
                 if (MessageBox.Show(
                         "File already exists in that period \nDo you want to replace the existing file with current file?",
                         "File already exists", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    File.Delete(Set_File_Storage_String(yearID) + _filename);
-                    Set_Command("UPDATE files SET no_of_times_opened='0'");
-                    _ = command.ExecuteNonQuery();
+                    System.IO.File.Delete(Set_File_Storage_String(file.Year.Id) + _filename);
+                    file.NumberOfTimesOpened = 0;
                 }
                 else
                 {
                     return;
                 }
             }
-            else
-            {
-                Set_Command("INSERT INTO files(file_name, yearID, no_of_times_opened) VALUES(@file_name, @yearID, '0')");
-                command.Parameters.Clear();
-                _ = command.Parameters.AddWithValue("@file_name", _filename);
-                _ = command.Parameters.AddWithValue("@yearID", yearID);
-                _ = command.ExecuteNonQuery();
-            }
 
             // file copies for both replacement and creation ... so 
-            File.Copy(_filepath, Set_File_Storage_String(yearID) + _filename);
-
-            if (connection.State == ConnectionState.Open)
-            {
-                connection.Close();
-            }
+            System.IO.File.Copy(_filepath, Set_File_Storage_String(file.Year.Id) + _filename);
 
             _pathExists = false;
             _ = NavigationService?.Navigate(new SuccessfullyAcceptedDocuments());
@@ -184,19 +168,13 @@ namespace PYQ_Papers.Pages
             var animation = parent?.Resources["TextBoxAnimation"] as Storyboard;
             var isInputValid = true;
 
-            if (!SemesterInput.Text.All(char.IsDigit))
-            {
-                isInputValid = false;
-                animation?.Begin(SemesterInput);
-            }
-
             if (string.IsNullOrWhiteSpace(SubjectInput.Text))
             {
                 isInputValid = false;
                 animation?.Begin(SubjectInput);
             }
 
-            if (!YearInput.Text.All(char.IsDigit) || YearInput.Text.Length != 4)
+            if (YearInput.Text.Length != 4)
             {
                 isInputValid = false;
                 animation?.Begin(YearInput);
