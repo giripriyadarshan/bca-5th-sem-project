@@ -14,7 +14,7 @@ namespace PYQ_Papers
     public class commons
     {
         // Database related
-        private static string connstring =
+        private static readonly string connstring =
             "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|desktopappdb.mdf;Integrated Security=True;Connect Timeout=30";
 
         public static SqlConnection connection = new SqlConnection(connstring);
