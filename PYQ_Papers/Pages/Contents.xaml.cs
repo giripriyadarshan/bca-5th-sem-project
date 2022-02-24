@@ -121,7 +121,7 @@ namespace PYQ_Papers.Pages
             // if no item is selected, then it used to open the _fileStorage directory
             if (FileList.SelectedItem == null) return;
             var x = FileList.SelectedItem as ListOfFiles;
-        
+
             if (connection.State == ConnectionState.Closed)
             {
                 connection.Open();
