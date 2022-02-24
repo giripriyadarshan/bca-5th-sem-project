@@ -10,7 +10,7 @@ Named after the purpose of the final year project. It stores **P**revious **Y**e
   <li> 
     .NET Framework 4.x 
       <ul>
-        <li> Windows Presentation Framework (WPF) with C# </li>
+        <li> Windows Presentation Foundation (WPF) with C# </li>
         <li> ADO.NET </li>
       </ul>
   </li>
